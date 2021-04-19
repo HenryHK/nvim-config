@@ -1,0 +1,13 @@
+{
+    "languageserver": {
+        "golang": {
+          "command": "gopls",
+          "rootPatterns": ["go.mod"],
+          "filetypes": ["go"]
+        }
+    },
+    "coc.preferences.jumpCommand": "tab drop",
+    "python.jediEnabled": false,
+    "eslint.autoFixOnSave": true,
+    "coc.preferences.formatOnSaveFiletypes": ["javascript", "markdown", "javascriptreact"]
+}
