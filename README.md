@@ -1,6 +1,6 @@
-# My Neovim Configuration (prob. Vim as well)
+# My Neovim Configuration on WSL2
 
-## Neovim Configuration Location on Mac
+## Neovim Configuration Location on Mac/WSL
 
 `~/.config/nvim`
 
@@ -79,6 +79,12 @@ I map `jj` as `<esc>`. Not only because of the stupid touchbar (Apple gave it ba
 
 I use `fzf` as native app and install the `fzf-vim` plugin wrapping it by vim. Also I installed [bat](https://github.com/sharkdp/bat) to provide file preview with syntax highlighting.
 
+P.S. to use `bat` in ubuntu, because it's `batcat` in repo so you need to relink it somewhere and export it, what I did is like this:
+```bash
+ln -s /usr/bin/batcat ~/bin/bat
+```
+and append `~/bin` to PATH
+
 Text fuzzy search requires [ripgrep](https://github.com/BurntSushi/ripgrep)
 
 Functions:
@@ -100,7 +106,7 @@ I'm used to work with git in commandline. But I found it handy to access some gi
 
 2. :Gstatus - extended interactive ui of git status (fugitive)
 
-3. <leader>gm - show git message of the current line (git-messenger)
+3. ~~<leader>gm - show git message of the current line (git-messenger)~~ (UPDATE: I use `:GV`/`:GV!`/`:GV?` now)
 
 4. <right><right>/<left><left> - next/previous git hunk (fugitive)
 ```
@@ -145,7 +151,13 @@ nnoremap <S-Left> <C-w><
 
 ### Terminal
 
-Sometimes, just sometimes, I use terminal in neovim. `<C-t>` to toggle it. (P.S. `:q` will close the buffer and make the terminal not reusable)
+~~Sometimes, just sometimes, I use terminal in neovim. `<C-t>` to toggle it. (P.S. `:q` will close the buffer and make the terminal not reusable)~~
+
+[Floaterm](https://github.com/voldikss/vim-floaterm) is simply better and faster. It's really good when you want to change code and run watcher at the same time, just like vscode built-int terminal.
+
+### Copy Paste with global clip board on windows
+
+I configured according to here: https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl
 
 ## License
 MIT
