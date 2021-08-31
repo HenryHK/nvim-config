@@ -79,8 +79,8 @@ Plug 'morhetz/gruvbox'
 " floatterm, simply the best
 Plug 'voldikss/vim-floaterm'
 
-" wakatime to track time
-Plug 'wakatime/vim-wakatime'
+" TreeSitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " end of plugins settings
 call plug#end()
@@ -158,8 +158,9 @@ set autoindent
 set showmatch
 
 " fold method
-set foldmethod=syntax
-set foldlevelstart=99
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set nofoldenable
 
 " this is needed for correctly syntax highlight long lines
 " for me it's js string literals, found the answer here: https://www.reddit.com/r/vim/comments/7imly7/syntax_highlighting_breaks_on_really_long_lines/
@@ -245,8 +246,8 @@ nmap <F9> :TagbarToggle<CR>
 
 " nerdcomment
 " use gcc to quickly toggle comments in normal and visual mode
-nnoremap gcc :call NERDComment(0,"toggle")<CR>
-vnoremap gcc :call NERDComment(0,"toggle")<CR>
+nnoremap gcc :call nerdcommenter#Comment("n", "Comment")<CR>
+vnoremap gcc :call nerdcommenter#Comment("n", "Comment")<CR>
 
 " GitGutter
 nmap <right><right> <Plug>(GitGutterNextHunk)
@@ -310,6 +311,7 @@ let dart_html_in_string=v:true
 nmap <C-p> :Files<CR>
 " buffer fuzzy search 
 nmap <C-e> :Buffers<CR>
+nmap <C-g> :GF?<CR>
 " fzf open action
 let g:fzf_action = {
   \ 'ctrl-e': 'edit',
@@ -375,3 +377,17 @@ let g:floaterm_width=0.8
 let g:floaterm_height=0.8
 let g:floaterm_wintitle=0
 let g:floaterm_autoclose=1
+
+" nvim-lspconfig
+lua << EOF
+-- treesitter
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+  indent = {
+    enable = true
+  },
+}
+EOF
