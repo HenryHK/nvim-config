@@ -14,11 +14,6 @@ Plug 'git://github.com/tpope/vim-surround.git'
 " for repeat -> enhance surround.vim, . to repeat command
 Plug 'tpope/vim-repeat'
 
-" fuzzy search everything utilizing fzf
-" if fzf is installed via homebrew
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
 " file tree in current directory
 " <ctrl>-n to toggle
 Plug 'scrooloose/nerdtree'
@@ -58,6 +53,9 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
+" treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 " rainbow parentheses improved
 Plug 'luochen1990/rainbow'
 " 0 if you want to enable it later via :RainbowToggle
@@ -89,7 +87,7 @@ Plug 'morhetz/gruvbox'
 Plug 'voldikss/vim-floaterm'
 
 " wakatime to track time
-Plug 'wakatime/vim-wakatime'
+" Plug 'wakatime/vim-wakatime'
 
 " end of plugins settings
 call plug#end()
@@ -167,8 +165,9 @@ set autoindent
 set showmatch
 
 " fold method
-set foldmethod=syntax
-set foldlevelstart=99
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set nofoldenable
 
 " this is needed for correctly syntax highlight long lines
 " for me it's js string literals, found the answer here: https://www.reddit.com/r/vim/comments/7imly7/syntax_highlighting_breaks_on_really_long_lines/
@@ -241,8 +240,8 @@ nmap <F9> :TagbarToggle<CR>
 
 " nerdcomment
 " use gcc to quickly toggle comments in normal and visual mode
-nnoremap gcc :call NERDComment(0,"toggle")<CR>
-vnoremap gcc :call NERDComment(0,"toggle")<CR>
+nnoremap gcc :call nerdcommenter#Comment("n", "Comment")<CR>
+vnoremap gcc :call nerdcommenter#Comment("n", "Comment")<CR>
 
 " GitGutter
 nmap <right><right> <Plug>(GitGutterNextHunk)
@@ -301,23 +300,15 @@ let g:neoformat_enabled_python = ['autopep8', 'isort']
 let g:dart_style_guide = 2
 let dart_html_in_string=v:true
 
-" fzf configuration
-" ctrlp files fuzzy search using fzf
-" nmap <C-p> :Files<CR>
-" buffer fuzzy search 
-" nmap <C-e> :Buffers<CR>
-" git changed files fuzzy search 
+" telescope configuration
+" find files based on name
 nnoremap <C-p> <cmd>Telescope find_files<cr>
+" fuzzy search based on content
 nnoremap <leader>f <cmd>Telescope live_grep<cr>
+" fuzzy search buffers based on name
 nnoremap <C-e> <cmd>Telescope buffers<cr>
+" fuzzy search git changed files based on name
 noremap <C-g> <cmd>Telescope git_status<CR>
-noremap <F12> :vsp<cr>:Telescope lsp_definitions<CR>
-" fzf open action
-let g:fzf_action = {
-  \ 'ctrl-e': 'edit',
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
 
 " autocomplete for :Git checkout <branch>
 function! s:gitCheckoutRef(ref) 
@@ -330,19 +321,8 @@ function! s:gitListRefs()
    return split(l:refs,'\r\n*')[1:] "jump past the first line which is the git command
 endfunction
 
-" magic to fzf with git
-command! -bang Gbranch call fzf#run({ 'source': s:gitListRefs(), 'sink': function('s:gitCheckoutRef'), 'dir':expand('%:p:h') })
-
 " customize Rg with preview
 let $BAT_THEME = 'TwoDark'
-let $FZF_PREVIEW_COMMAND = 'bat --color=always {} || cat {} || tree -C {}'
-let g:fzf_layout = { 'down': '~50%' }
-" fzf now has Rg command built in
-" nnoremap <silent> <Leader>f :Rg<CR>
-
-" using tab to cycle through suggestion list
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " git blamer
 let g:blamer_enabled = 1
@@ -401,8 +381,10 @@ local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', '<F12>', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
@@ -410,17 +392,16 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '<C-f>', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  buf_set_keymap('n', 'F', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
 end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'gopls', 'tsserver' }
+local servers = { 'gopls', 'tsserver', 'efm' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -428,6 +409,70 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+-- special handling for ts as we want to use eslint/prettier on format
+nvim_lsp.tsserver.setup {
+    on_attach = function(client, bufnr)
+        client.resolved_capabilities.document_formatting = false
+        on_attach(client, bufnr)
+    end
+}
+
+
+local filetypes = {
+    typescript = "eslint",
+    typescriptreact = "eslint",
+    javascript = "eslint",
+    javascriptreact = "eslint",
+    ["javascript.jsx"] = "eslint",
+}
+
+local linters = {
+    eslint = {
+        sourceName = "eslint",
+        command = "eslint",
+        rootPatterns = {".eslintrc.js", "package.json"},
+        debounce = 100,
+        args = {"--stdin", "--stdin-filename", "%filepath", "--format", "json"},
+        parseJson = {
+            errorsRoot = "[0].messages",
+            line = "line",
+            column = "column",
+            endLine = "endLine",
+            endColumn = "endColumn",
+            message = "${message} [${ruleId}]",
+            security = "severity"
+        },
+        securities = {[2] = "error", [1] = "warning"}
+    }
+}
+
+local formatters = {
+    prettier = {command = "prettier", args = {"--stdin-filepath", "%filepath"}},
+    prettierEslint = {
+        command = 'prettier-eslint',
+        args = { '--stdin' },
+        rootPatterns = { '.git' },
+    },
+}
+
+local formatFiletypes = {
+    typescript = "prettierEslint",
+    typescriptreact = "prettierEslint",
+    javascript = "prettierEslint",
+    javascriptreact = "prettierEslint",
+    ["javascript.jsx"] = "prettierEslint",
+}
+
+nvim_lsp.diagnosticls.setup {
+    on_attach = on_attach,
+    filetypes = vim.tbl_keys(filetypes),
+    init_options = {
+        filetypes = filetypes,
+        linters = linters,
+        formatters = formatters,
+        formatFiletypes = formatFiletypes
+    }
+}
 -- luasnip setup
 local luasnip = require 'luasnip'
 
@@ -440,17 +485,17 @@ cmp.setup {
     end,
   },
   mapping = {
-    ['<C-p>'] = cmp.mapping.prev_item(),
-    ['<C-n>'] = cmp.mapping.next_item(),
-    ['<C-d>'] = cmp.mapping.scroll(-4),
-    ['<C-f>'] = cmp.mapping.scroll(4),
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ['<Tab>'] = cmp.mapping.mode({ 'i', 's' }, function(_, fallback)
+    ['<Tab>'] =  function(fallback)
       if vim.fn.pumvisible() == 1 then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
       elseif luasnip.expand_or_jumpable() then
@@ -458,8 +503,8 @@ cmp.setup {
       else
         fallback()
       end
-    end),
-    ['<S-Tab>'] = cmp.mapping.mode({ 'i', 's' }, function(_, fallback)
+    end,
+    ['<S-Tab>'] = function(fallback)
       if vim.fn.pumvisible() == 1 then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
       elseif luasnip.jumpable(-1) then
@@ -467,11 +512,40 @@ cmp.setup {
       else
         fallback()
       end
-    end),
+    end,
   },
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
 }
+
+-- telescope mapping
+local actions = require('telescope.actions')
+-- Global remapping
+------------------------------
+require('telescope').setup{
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-n>"] = false,
+        ["<C-p>"] = false,
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+      },
+    },
+  }
+}
+
+-- treesitter
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+  indent = {
+    enable = true
+  },
+}
 EOF
+
