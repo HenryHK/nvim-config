@@ -82,6 +82,9 @@ Plug 'voldikss/vim-floaterm'
 " TreeSitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+" wakatime
+Plug 'wakatime/vim-wakatime'
+
 " end of plugins settings
 call plug#end()
 
