@@ -45,10 +45,6 @@ Plug 'majutsushi/tagbar'
 " vim go plugin
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-" Use coc instead of old ycm
-" Use release branch
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 " rainbow parentheses improved
 Plug 'luochen1990/rainbow'
 " 0 if you want to enable it later via :RainbowToggle
@@ -86,8 +82,22 @@ Plug 'wakatime/vim-wakatime'
 
 " copilot
 Plug 'github/copilot.vim'
-" vim wiki
-Plug 'vimwiki/vimwiki'
+
+" nvim lsp config
+Plug 'neovim/nvim-lspconfig'
+
+" autocomplete plugin
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+" nvim-cmp snippet: vsnip
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+" nvim-cmp tabnine
+Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 
 " end of plugins settings
 call plug#end()
@@ -130,7 +140,6 @@ autocmd InsertEnter * :set relativenumber
 set incsearch
 " highlight search terms
 set hlsearch
-set lazyredraw
 
 " ignore case when searching
 set ignorecase
@@ -299,12 +308,12 @@ let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 let g:airline#extensions#ale#enabled = 0
-let g:ale_fixers = {'javascript': ['eslint']}
-let g:ale_fix_on_save = 0
+let g:ale_fixers = {
+    \ 'javascript': ['prettier','eslint'],
+    \ 'css': ['prettier', 'eslint'] }
+let g:ale_fix_on_save =1 
 let g:ale_open_list = 0
-
-" TODO: Python Configuration
-let g:neoformat_enabled_python = ['autopep8', 'isort']
+let g:ale_linters_explicit = 1 " Don't use default linters unless specified
 
 " Flutter Configuration
 let g:dart_style_guide = 2
@@ -344,28 +353,6 @@ let g:fzf_layout = { 'down': '~50%' }
 " fzf now has Rg command built in
 nnoremap <silent> <Leader>f :Rg<CR>
 
-" coc.nvim
-" coc configuration
-" Use C to open coc config
-call SetupCommandAbbrs('C', 'CocConfig')
-
-" GOTO of coc
-nmap <silent> <F12> <Plug>(coc-definition)
-
-" using tab to cycle through suggestion list
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" coc-prettier
-" :Prettier command
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-vmap <leader>p  <Plug>(coc-format-selected)
-nmap <leader>p  <Plug>(coc-format-selected)
-
 " git blamer
 let g:blamer_enabled = 1
 let g:blamer_delay = 500
@@ -382,16 +369,8 @@ let g:floaterm_height=0.8
 let g:floaterm_wintitle=0
 let g:floaterm_autoclose=1
 
-" nvim-lspconfig
-lua << EOF
--- treesitter
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-  indent = {
-    enable = true
-  },
-}
-EOF
+" import lua config
+lua require('lsp-configs')
+lua require('treesitter-configs')
+lua require('cmp-configs')
+lua require('cmp-tabnine-configs')
