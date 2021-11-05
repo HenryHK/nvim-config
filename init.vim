@@ -63,8 +63,7 @@ Plug 'Yggdroot/indentLine'
 let g:indentLine_char = '|'
 
 " Vim JavaScript
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+Plug 'chemzqm/vim-jsx-improve'
 Plug 'w0rp/ale'
 
 " Vim JSON
@@ -84,6 +83,11 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " wakatime
 Plug 'wakatime/vim-wakatime'
+
+" copilot
+Plug 'github/copilot.vim'
+" vim wiki
+Plug 'vimwiki/vimwiki'
 
 " end of plugins settings
 call plug#end()
@@ -177,6 +181,7 @@ set termguicolors
 
 " sepcial indentation for jsx and coffeescript
 autocmd FileType javascript.jsx setlocal tabstop=2 shiftwidth=2 noexpandtab
+autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 noexpandtab
 autocmd BufNewFile,BufReadPost *.coffee setl tabstop=2 shiftwidth=2 expandtab foldmethod=manual
 " support json comment
 autocmd FileType json syntax match Comment +\/\/.\+$+
@@ -289,10 +294,6 @@ let g:go_metalinter_command='golangci-lint run --print-issued-lines=false --buil
 " F10 for coverage report
 au FileType go nmap <F10> :GoCoverageToggle -short<cr>
 
-" TODO: JavaScript Configuration
-let g:jsx_ext_required = 0
-let g:javascript_plugin_jsdoc = 1
-let g:neoformat_enabled_javascript = ['prettier']
 " Ale configuration: lint plugin
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
