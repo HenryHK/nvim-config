@@ -45,18 +45,9 @@ Plug 'majutsushi/tagbar'
 " vim go plugin
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-" rainbow parentheses improved
-Plug 'luochen1990/rainbow'
-" 0 if you want to enable it later via :RainbowToggle
-let g:rainbow_active = 1 
-
 " EasyFold only for Python
 Plug 'tmhedberg/SimpylFold'
 let g:SimpylFold_docstring_preview = 1
-
-" indentation indication
-Plug 'Yggdroot/indentLine'
-let g:indentLine_char = '|'
 
 " Vim JavaScript
 Plug 'chemzqm/vim-jsx-improve'
@@ -69,7 +60,8 @@ Plug 'elzr/vim-json'
 Plug 'tpope/vim-obsession'
 
 " gruv color schema
-Plug 'morhetz/gruvbox'
+Plug 'rktjmp/lush.nvim'
+Plug 'ellisonleao/gruvbox.nvim'
 
 " floatterm, simply the best
 Plug 'voldikss/vim-floaterm'
@@ -98,6 +90,12 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 " nvim-cmp tabnine
 Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
+" nvim-cmp lspkind
+Plug 'onsails/lspkind-nvim'
+" indent blankline
+Plug 'lukas-reineke/indent-blankline.nvim'
+" lsp_signature
+Plug 'ray-x/lsp_signature.nvim'
 
 " end of plugins settings
 call plug#end()
@@ -107,9 +105,8 @@ call plug#end()
 " magic of using vim
 set nocompatible
 
-" fundamental settings
-" use dracula theme as the color theme
-autocmd vimenter * colorscheme gruvbox
+set background=dark " or light if you want light mode
+colorscheme gruvbox
 
 " improve neovim performance slightly
 set nocursorcolumn
@@ -136,6 +133,7 @@ set number
 autocmd InsertLeave * :set norelativenumber number
 autocmd InsertEnter * :set relativenumber
 
+set lazyredraw
 " find as typing
 set incsearch
 " highlight search terms
@@ -185,7 +183,8 @@ set nofoldenable
 set synmaxcol=0
 syntax sync minlines=256
 
-" set true color, https://github.com/morhetz/gruvbox/wiki/Terminal-specific
+set t_8f=^[[38;2;%lu;%lu;%lum
+set t_8b=^[[48;2;%lu;%lu;%lum
 set termguicolors
 
 " sepcial indentation for jsx and coffeescript
@@ -374,3 +373,4 @@ lua require('lsp-configs')
 lua require('treesitter-configs')
 lua require('cmp-configs')
 lua require('cmp-tabnine-configs')
+lua require('indent-blankline-configs')
