@@ -19,16 +19,13 @@ Plug 'tpope/vim-repeat'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-" file tree in current directory
-" <ctrl>-n to toggle
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-" devicons
-Plug 'ryanoasis/vim-devicons'
+" nvim-tree - to replce nerdtree
+Plug 'kyazdani42/nvim-tree.lua'
 
-" Airline enhancing bottom line
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" lualine - to replace airline
+Plug 'nvim-lualine/lualine.nvim'
+" lua fork of vim-devicons
+Plug 'kyazdani42/nvim-web-devicons'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -277,21 +274,6 @@ nmap <left><left> <Plug>(GitGutterPrevHunk)
 nmap gua <Plug>(GitGutterUndoHunk)
 nmap gpr <Plug>(GitGutterPreviewHunk)
 
-" Nerdtree
-" open nerdtree automatically when nvim open
-" autocmd vimenter * NERDTree
-" close vim if the only window left is open is nerd tree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" nerdtree key shortcuts
-map <C-n> :NERDTreeToggle<CR>
-" NERDTree configurations, this doesn't fully work, additional square brackets
-" are added somehow to folders
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-if exists('g:loaded_webdevicons')
-  call webdevicons#refresh()
-endif
-
 " Go Configuration
 autocmd BufWritePre *.go :GoBuild
 " this will freeze terminal and slow down save, just run it manually when big changes are made
@@ -312,7 +294,6 @@ au FileType go nmap <F10> :GoCoverageToggle -short<cr>
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
-let g:airline#extensions#ale#enabled = 0
 let g:ale_fixers = {
     \ 'javascript': ['prettier','eslint'],
     \ 'css': ['prettier', 'eslint'] }
@@ -375,6 +356,19 @@ nnoremap <C-g> <cmd>Telescope git_status<cr>
 nnoremap <C-e> <cmd>Telescope buffers<cr>
 nnoremap <C-t> <cmd>Telescope tags<cr>
 
+" nvim tree settings
+let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
+let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
+let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
+let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
+let g:nvim_tree_icon_padding = ' ' "one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if you set an empty string depending on your font.
+let g:nvim_tree_symlink_arrow = ' >> ' " defaults to ' ➛ '. used as a separator between symlinks' source and target.
+let g:nvim_tree_create_in_closed_folder = 0 "1 by default, When creating files, sets the path of a file when cursor is on a closed folder to the parent folder when 0, and inside the folder when 1.
+let g:nvim_tree_refresh_wait = 500 "1000 by default, control how often the tree can be refreshed, 1000 means the tree can be refresh once per 1000ms.
+nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
+
 " import lua config
 lua require('lsp-configs')
 lua require('treesitter-configs')
@@ -382,3 +376,5 @@ lua require('cmp-configs')
 lua require('cmp-tabnine-configs')
 lua require('indent-blankline-configs')
 lua require('telescope-configs')
+lua require('lualine-configs')
+lua require('nvim-tree-configs')
