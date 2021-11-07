@@ -19,6 +19,8 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'cmp_tabnine' },
     { name = 'vsnip' }, -- For vsnip users.
+    { name = 'path' },
+    { name = 'buffer' },
   },
   formatting = {
     format = lspkind.cmp_format({with_text = false, maxwidth = 50})

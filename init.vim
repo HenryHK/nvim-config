@@ -84,6 +84,7 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/nvim-cmp'
 " nvim-cmp snippet: vsnip
 Plug 'hrsh7th/cmp-vsnip'
@@ -96,6 +97,11 @@ Plug 'onsails/lspkind-nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 " lsp_signature
 Plug 'ray-x/lsp_signature.nvim'
+
+" telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 " end of plugins settings
 call plug#end()
@@ -318,19 +324,6 @@ let g:ale_linters_explicit = 1 " Don't use default linters unless specified
 let g:dart_style_guide = 2
 let dart_html_in_string=v:true
 
-" fzf configuration
-" ctrlp files fuzzy search using fzf
-nmap <C-p> :Files<CR>
-" buffer fuzzy search 
-nmap <C-e> :Buffers<CR>
-nmap <C-g> :GF?<CR>
-" fzf open action
-let g:fzf_action = {
-  \ 'ctrl-e': 'edit',
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
 " autocomplete for :Git checkout <branch>
 function! s:gitCheckoutRef(ref) 
     execute('Git checkout ' . a:ref)
@@ -345,10 +338,17 @@ endfunction
 " magic to fzf with git
 command! -bang Gbranch call fzf#run({ 'source': s:gitListRefs(), 'sink': function('s:gitCheckoutRef'), 'dir':expand('%:p:h') })
 
+" TODO: remove this when telescope support fuzzy search for live grep search
+" for now fzf is still the best choice to do grep fuzzy search
 " customize Rg with preview
 let $BAT_THEME = 'TwoDark'
 let $FZF_PREVIEW_COMMAND = 'bat --color=always {} || cat {} || tree -C {}'
 let g:fzf_layout = { 'down': '~50%' }
+let g:fzf_action = {
+  \ 'ctrl-e': 'edit',
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
 " fzf now has Rg command built in
 nnoremap <silent> <Leader>f :Rg<CR>
 
@@ -368,9 +368,17 @@ let g:floaterm_height=0.8
 let g:floaterm_wintitle=0
 let g:floaterm_autoclose=1
 
+" telescope Settings
+" Find files using Telescope command-line sugar.
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+nnoremap <C-g> <cmd>Telescope git_status<cr>
+nnoremap <C-e> <cmd>Telescope buffers<cr>
+nnoremap <C-t> <cmd>Telescope tags<cr>
+
 " import lua config
 lua require('lsp-configs')
 lua require('treesitter-configs')
 lua require('cmp-configs')
 lua require('cmp-tabnine-configs')
 lua require('indent-blankline-configs')
+lua require('telescope-configs')
