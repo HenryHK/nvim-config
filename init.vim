@@ -98,47 +98,13 @@ call plug#end()
 
 " Beiginning of general configuration
 
-" magic of using vim
-set nocompatible
-
-set background=dark " or light if you want light mode
-colorscheme gruvbox
-
-" improve neovim performance slightly
-set nocursorcolumn
-set nocursorline
-
-" set layout format
-set scrolljump=5
-" control whether highlight current line
+" set background=dark " or light if you want light mode
 :hi CursorLine   cterm=NONE ctermbg=240 ctermfg=white guibg=188 guifg=white
 
-" file encoding
-set fileencoding=utf-8
-set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
-
-" use space to all tab, set indentation to 4
-set tabstop=4
-set shiftwidth=4
-set expandtab
-
-" turn on line number
-set number
 " abosolute line number in normal mode
 " relative line number in insert mode
 autocmd InsertLeave * :set norelativenumber number
 autocmd InsertEnter * :set relativenumber
-
-set lazyredraw
-" find as typing
-set incsearch
-" highlight search terms
-set hlsearch
-
-" ignore case when searching
-set ignorecase
-" if search input contains upper case, do not ignore
-set smartcase
 
 " toggle file type on
 filetype on
@@ -153,35 +119,7 @@ filetype plugin indent on
 if !exists('g:syntax_on')
 	syntax enable
 endif
-
-" allow to use mouse
-set mouse=a
-set mousehide
-
-" turn on spell check
-set nospell
-
-" smart indentation
-set autoindent
-
-" show matched brackets and so on
-set showmatch
-
-" fold method
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-set nofoldenable
-
-" this is needed for correctly syntax highlight long lines
-" for me it's js string literals, found the answer here: https://www.reddit.com/r/vim/comments/7imly7/syntax_highlighting_breaks_on_really_long_lines/
-" this could dramatically slow performance, you may need to set this to a
-" certain number or just do :syntax off
-set synmaxcol=0
 syntax sync minlines=256
-
-set t_8f=^[[38;2;%lu;%lu;%lum
-set t_8b=^[[48;2;%lu;%lu;%lum
-set termguicolors
 
 " sepcial indentation for jsx and coffeescript
 autocmd FileType javascript.jsx setlocal tabstop=2 shiftwidth=2 noexpandtab
@@ -226,19 +164,6 @@ if has('clipboard')
     set clipboard=unnamed
   endif
 endif
-
-" Vim general settings for coc
-" Better display for messages
-set cmdheight=2
-
-" You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
-
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-
-" always show signcolumns
-set signcolumn=yes
 
 " abbrevation for command function
 function! SetupCommandAbbrs(from, to)
@@ -352,6 +277,8 @@ nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 
 " import lua config
+lua require('options')
+lua require('vim-cmd-config')
 lua require('lsp-configs')
 lua require('treesitter-configs')
 lua require('cmp-configs')
