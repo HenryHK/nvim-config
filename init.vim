@@ -68,12 +68,6 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " wakatime
 Plug 'wakatime/vim-wakatime'
 
-" copilot
-Plug 'github/copilot.vim'
-
-" nvim lsp config
-Plug 'neovim/nvim-lspconfig'
-
 " autocomplete plugin
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
