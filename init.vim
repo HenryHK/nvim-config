@@ -48,7 +48,6 @@ let g:SimpylFold_docstring_preview = 1
 
 " Vim JavaScript
 Plug 'chemzqm/vim-jsx-improve'
-Plug 'w0rp/ale'
 
 " Vim JSON
 Plug 'elzr/vim-json'
@@ -290,17 +289,6 @@ let g:go_metalinter_command='golangci-lint run --print-issued-lines=false --buil
 " F10 for coverage report
 au FileType go nmap <F10> :GoCoverageToggle -short<cr>
 
-" Ale configuration: lint plugin
-let g:ale_sign_error = '⤫'
-let g:ale_sign_warning = '⚠'
-let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
-let g:ale_fixers = {
-    \ 'javascript': ['prettier','eslint'],
-    \ 'css': ['prettier', 'eslint'] }
-let g:ale_fix_on_save =1 
-let g:ale_open_list = 0
-let g:ale_linters_explicit = 1 " Don't use default linters unless specified
-
 " Flutter Configuration
 let g:dart_style_guide = 2
 let dart_html_in_string=v:true
@@ -334,7 +322,7 @@ let g:fzf_action = {
 nnoremap <silent> <Leader>f :Rg<CR>
 
 " git blamer
-let g:blamer_enabled = 1
+let g:blamer_enabled = 0 
 let g:blamer_delay = 500
 
 " floatterm settings
