@@ -93,7 +93,7 @@ end
 
 -- config efm
 local eslint = {
-  lintCommand = './node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}',
+  lintCommand = 'eslint_d -f unix --stdin --stdin-filename ${INPUT}',
   lintIgnoreExitCode = true,
   lintStdin = true,
   lintFormats = {'%f:%l:%c: %m'},
@@ -122,7 +122,7 @@ local efm_languages = {
 nvim_lsp['efm'].setup {
     init_options = {documentFormatting = true},
     settings = {
-        rootMarkers = {'package.json', '.git/', '.zshrc'},
+        rootMarkers = {'.git/', 'package.json', '.zshrc'},
         languages = efm_languages,
     },
     capabilities = capabilities,
