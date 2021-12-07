@@ -83,13 +83,20 @@ end
 
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'gopls', 'tsserver' }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
+-- golang
+nvim_lsp['gopls'].setup {
     capabilities = cmp_capabilities,
     on_attach = on_attach_base,
-  }
-end
+}
+
+-- js
+nvim_lsp['tsserver'].setup {
+    capabilities = cmp_capabilities,
+    on_attach = on_attach_base,
+    handlers = {
+        ['textDocument/publishDiagnostics'] = function(...) end --disable tsserver diagnostics as we use efm now
+    },
+}
 
 -- config efm
 local eslint = {
