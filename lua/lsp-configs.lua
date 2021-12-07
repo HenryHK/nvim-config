@@ -70,7 +70,7 @@ local on_attach_base = function(client, bufnr)
       client.resolved_capabilities.document_range_formatting = false
   end
 
-  vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting_sync()")
+  vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting_sync(nil, 2000)")
   if client.resolved_capabilities.document_formatting then
       vim.api.nvim_exec([[
        augroup LspAutocommands

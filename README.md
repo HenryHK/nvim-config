@@ -22,13 +22,15 @@ To remove useless plugins, run `:PlugClean`.
 
 ### Plugin
 
-After a long time usage of [YouCompleteMe](https://github.com/Valloric/YouCompleteMe), I switched to [coc.nvim](https://github.com/neoclide/coc.nvim). With the great async feature of neovim, it works like a charm especially when most mainstream languages have great [language server protocol](https://microsoft.github.io/language-server-protocol/) supports(__Thank you Microsoft, sincerely__).
+~~After a long time usage of [YouCompleteMe](https://github.com/Valloric/YouCompleteMe), I switched to [coc.nvim](https://github.com/neoclide/coc.nvim). With the great async feature of neovim, it works like a charm especially when most mainstream languages have great [language server protocol](https://microsoft.github.io/language-server-protocol/) supports(__Thank you Microsoft, sincerely__).~~
+
+I'm using nvim-cmp now.
 
 ### Language support 
 
 #### Golang 
 
-You might need to install additional go packages to use full feature of [vim-go](https://github.com/fatih/vim-go). Please refer to the instructions. I use this simply as an addition to `coc.nvim`.
+You might need to install additional go packages to use full feature of [vim-go](https://github.com/fatih/vim-go). Please refer to the instructions.
 
 A few useful shortcuts I use every day:
 
@@ -38,6 +40,8 @@ A few useful shortcuts I use every day:
 * >>/<<: Go to next function
 
 * :GoImports: make import a bit more straightforward
+
+* :GoAddTags json bson: you will love this
 ```
 
 #### JavaScript/JSX(React)
@@ -53,18 +57,6 @@ The TS/JS LSP works like a charm, the only shortcuts I use in my daily developme
 * <F12>: Go to definition
 ```
 
-#### Python
-
-Still WIP but it feels ok. I use nvim now to develop our in-house ETL using Apache Airflow.
-
-#### CoffeeScript
-
-Syntax highlighting and simple lint.
-
-#### Rust
-
-I just started learning Rust. Not sure about complicated projects, but `Hello-Rust` works.
-
 ## General Settings
 
 ### Leader Key
@@ -76,6 +68,8 @@ I use `<space>` as leader key. The easy position makes it easy and encourages me
 I map `jj` as `<esc>`. Not only because of the stupid touchbar (Apple gave it back now), but make normal mode more accessible for me, which I think is a good practice for every vimmer.
 
 ### Fuzzy search
+
+#### fzf
 
 I use `fzf` as native app and install the `fzf-vim` plugin wrapping it by vim. Also I installed [bat](https://github.com/sharkdp/bat) to provide file preview with syntax highlighting.
 
@@ -90,12 +84,14 @@ Text fuzzy search requires [ripgrep](https://github.com/BurntSushi/ripgrep)
 Functions:
 
 ```
-1. <ctrl>-p: project file fuzzy search
-
-2. <ctrl>-e: buffer file fuzzy search
-
-3. <leader>f: text fuzzy search 
+1. <leader>f: text fuzzy search 
 ```
+
+Now I only use fzf for fuzzy global text search
+
+#### telescope
+
+The new fav of the community. 
 
 ### Git
 
@@ -153,9 +149,9 @@ nnoremap <S-Left> <C-w><
 
 ~~Sometimes, just sometimes, I use terminal in neovim. `<C-t>` to toggle it. (P.S. `:q` will close the buffer and make the terminal not reusable)~~
 
-[Floaterm](https://github.com/voldikss/vim-floaterm) is simply better and faster. It's really good when you want to change code and run watcher at the same time, just like vscode built-int terminal.
+[Floaterm](https://github.com/voldikss/vim-floaterm) is simply better and faster. It's really good when you want to change code and run watcher at the same time, just like vscode built-in terminal.
 
-### Copy Paste with global clip board on windows
+### Copy Paste with global clip board on WSL (Windows only)
 
 I configured according to here: https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl
 
