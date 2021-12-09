@@ -18,13 +18,16 @@ Copy the config into your `.vimrc` or `init.vim` (I didn't test this with Vim bu
 
 To remove useless plugins, run `:PlugClean`.
 
+I was sold [packer](https://github.com/wbthomason/packer.nvim) by the community. I definitely will try it out later when I have some spare time.
+
 ## Autocomplete
 
 ### Plugin
 
 ~~After a long time usage of [YouCompleteMe](https://github.com/Valloric/YouCompleteMe), I switched to [coc.nvim](https://github.com/neoclide/coc.nvim). With the great async feature of neovim, it works like a charm especially when most mainstream languages have great [language server protocol](https://microsoft.github.io/language-server-protocol/) supports(__Thank you Microsoft, sincerely__).~~
 
-I'm using nvim-cmp now.
+I'm using [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) now, which works out nicely but as the author said, it's still in active development.
+
 
 ### Language support 
 
@@ -57,6 +60,8 @@ The TS/JS LSP works like a charm, the only shortcuts I use in my daily developme
 * <F12>: Go to definition
 ```
 
+One hassle I find after switching to native lsp is linting on jsx, it seems to me that [efm](https://github.com/mattn/efm-langserver) + [eslint_d](https://github.com/mantoni/eslint_d.js/) works alright, at least almost the same good as vscode.
+
 ## General Settings
 
 ### Leader Key
@@ -87,31 +92,48 @@ Functions:
 1. <leader>f: text fuzzy search 
 ```
 
-Now I only use fzf for fuzzy global text search
+Now I only use fzf for fuzzy global text search.
 
-#### telescope
+#### Telescope
 
-The new fav of the community. 
+The new fav of the community, probaly one of the best plugins you can have for nvim. I use [Telescope](https://github.com/nvim-telescope/telescope.nvim) and [Telescope-fzf-native](https://github.com/nvim-telescope/telescope-fzf-native.nvim) to work together on sorting, which will make telescope supports fuzzy search on a lot of things. But not all of them. So I still keep fzf for text fuzzy search in a project.
+
+Some useful ones I use daily
+
+```
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+nnoremap <C-g> <cmd>Telescope git_status<cr>
+nnoremap <C-e> <cmd>Telescope buffers<cr>
+nnoremap <C-t> <cmd>Telescope tags<cr>
+```
+
+Another one I'll use alongside with `<leader>f` is `:Telescope live_grep` which is precise search, like vscode one everyone likes.
+
+For js/jsx/tsx development, sometimes I find it handy to do `:Telescope lsp_workspace_diagnostics` or  `:Telescope lsp_document_diagnostics`. It's nice to have it all at one single place and you can check.
 
 ### Git
 
 I'm used to work with git in commandline. But I found it handy to access some git info/actions within the editor.
 
 ```
-1. :Gdiff - diff the current file (fugitive)
+1. :GDiff - diff the current file (fugitive)
 
-2. :Gstatus - extended interactive ui of git status (fugitive)
+2. :GStatus - extended interactive ui of git status (fugitive)
 
 3. ~~<leader>gm - show git message of the current line (git-messenger)~~ (UPDATE: I use `:GV`/`:GV!`/`:GV?` now)
 
 4. <right><right>/<left><left> - next/previous git hunk (fugitive)
+
+5. GBrowse/GBrowse! - it will open remote origin in your browser or copy the link to your clipboard
+
+6. GBlame - time to blame your colleagues!
 ```
 
 the status in gutter is provided by `vim-gitgutter`.
 
 ### Buffer, Pane, Tab, etc.
 
-Since I use `fzf`/`fzf-vim` for most of my navigation, the configuration is part of the `fzf-vim`.
+~~Since I use `fzf`/`fzf-vim` for most of my navigation, the configuration is part of the `fzf-vim`.~~ I use Telescope now for buffer, files etc., but this still works.
 
 ```
 1. <ctrl>-v: vertical split open from fzf window
@@ -121,7 +143,7 @@ Since I use `fzf`/`fzf-vim` for most of my navigation, the configuration is part
 3. <ctrl>-t: open from fzf window in another tab
 ```
 
-Also I use `NerdTree` as file explorer, I use `<ctrl>-n` to toggle it and keep default key bindings.
+Also I use ~~`NerdTree`~~  as file explorer, I use `<ctrl>-n` to toggle it and keep default key bindings.
 
 For navigation:
 
