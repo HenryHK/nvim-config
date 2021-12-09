@@ -27,3 +27,14 @@ vim.opt.foldenable = false
 vim.opt.synmaxcol = 0
 vim.opt.termguicolors = true
 vim.opt.signcolumn = 'yes' -- always show signcolumns
+
+-- clipboard setting
+-- See https://stackoverflow.com/questions/11489428/how-to-make-vim-paste-from-and-copy-to-systems-clipboard
+if vim.fn.has('clipboard') == 1 then
+  if vim.fn.has('unnamedplus') == 1 then
+    vim.opt.clipboard="unnamed,unnamedplus"
+  else
+    vim.opt.clipboard="unnamed"
+  end
+end
+
