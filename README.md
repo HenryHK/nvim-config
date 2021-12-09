@@ -143,8 +143,6 @@ the status in gutter is provided by `vim-gitgutter`.
 3. <ctrl>-t: open from fzf window in another tab
 ```
 
-Also I use ~~`NerdTree`~~  as file explorer, I use `<ctrl>-n` to toggle it and keep default key bindings.
-
 For navigation:
 
 ```
@@ -167,6 +165,8 @@ nnoremap <S-Right> <C-w>>
 nnoremap <S-Left> <C-w><
 ```
 
+Also I use ~~`NerdTree`~~[nvim-tree](https://github.com/kyazdani42/nvim-tree.lua)  as file explorer, I use `<ctrl>-n` to toggle it and keep default key bindings.
+
 ### Terminal
 
 ~~Sometimes, just sometimes, I use terminal in neovim. `<C-t>` to toggle it. (P.S. `:q` will close the buffer and make the terminal not reusable)~~
@@ -176,6 +176,20 @@ nnoremap <S-Left> <C-w><
 ### Copy Paste with global clip board on WSL (Windows only)
 
 I configured according to here: https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl
+
+### Treesitter
+
+Just use [it](https://github.com/nvim-treesitter/nvim-treesitter)! This is just how good nvim is, isn't it?
+
+### Fancy AI enhancements
+
+#### tabnine
+
+Since I'm using nvim-cmp so I just use the tabnine source provider for it. I also tried GitHub Copilot - it's really impressive but I don't like the lag. Sometimes I just want to tab indent and then it autocomplete a bunch code - tho the result is impressive but it's not really needed when I know what I'm gonna do. Tabnine is good enough.
+
+### Lua V.S. Vimscript
+
+Lua is just faster. I'm still migrating my config. It now should have as many lua-based plugins possible. The next steps would be fully migrate `init.vim` to lua and move from `vim-plug` to `packer`.
 
 ## License
 MIT
