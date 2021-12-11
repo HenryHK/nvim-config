@@ -56,6 +56,7 @@ Plug 'tpope/vim-obsession'
 " gruv color schema
 Plug 'rktjmp/lush.nvim'
 Plug 'ellisonleao/gruvbox.nvim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 " floatterm, simply the best
 Plug 'voldikss/vim-floaterm'
