@@ -95,16 +95,24 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 " end of plugins settings
 call plug#end()
 
+lua << EOF
+  for k, v in pairs(package.loaded) do
+    if string.match(k, "^my-lua-configs") then
+      package.loaded[k] = nil
+    end
+  end
+EOF
+
 " import lua config
-lua require('vim-globals-configs')
-lua require('vim-options-configs')
-lua require('vim-cmd-configs')
-lua require('lsp-configs')
-lua require('treesitter-configs')
-lua require('cmp-configs')
-lua require('cmp-tabnine-configs')
-lua require('indent-blankline-configs')
-lua require('telescope-configs')
-lua require('lualine-configs')
-lua require('nvim-tree-configs')
-lua require('vim-mappings-configs')
+lua require('my-lua-configs/vim-globals-configs')
+lua require('my-lua-configs/vim-options-configs')
+lua require('my-lua-configs/vim-cmd-configs')
+lua require('my-lua-configs/lsp-configs')
+lua require('my-lua-configs/treesitter-configs')
+lua require('my-lua-configs/cmp-configs')
+lua require('my-lua-configs/cmp-tabnine-configs')
+lua require('my-lua-configs/indent-blankline-configs')
+lua require('my-lua-configs/telescope-configs')
+lua require('my-lua-configs/lualine-configs')
+lua require('my-lua-configs/nvim-tree-configs')
+lua require('my-lua-configs/vim-mappings-configs')
