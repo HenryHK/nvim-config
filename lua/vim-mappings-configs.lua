@@ -42,10 +42,10 @@ map('n', 'gcc', ':call nerdcommenter#Comment("n", "Comment")<CR>')
 map('v', 'gcc', ':call nerdcommenter#Comment("n", "Comment")<CR>')
 
 -- gitgutter
-map('n', '<right><right>', '<Plug>(GitGutterNextHunk)')
-map('n', '<left><left>', '<Plug>(GitGutterPrevHunk)')
-map('n', 'gua', '<Plug>(GitGutterUndoHunk)')
-map('n', 'gpr', '<Plug>(GitGutterPreviewHunk)')
+map('n', '<right><right>', ':GitGutterNextHunk<CR>')
+map('n', '<left><left>', ':GitGutterPrevHunk<CR>')
+map('n', 'gua', ':GitGutterUndoHunk<CR>')
+map('n', 'gpr', ':GitGutterPreviewHunk<CR>')
 
 -- fzf
 map('n', '<leader>f', ':Rg<CR>')
