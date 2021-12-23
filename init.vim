@@ -44,9 +44,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " EasyFold only for Python
 Plug 'tmhedberg/SimpylFold'
 
-" Vim JavaScript
-Plug 'chemzqm/vim-jsx-improve'
-
 " Vim JSON
 Plug 'elzr/vim-json'
 
