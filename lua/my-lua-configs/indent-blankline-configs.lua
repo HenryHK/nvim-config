@@ -6,7 +6,7 @@
 -- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
 
 vim.opt.list = true
-vim.opt.listchars:append("space:⋅")
+-- vim.opt.listchars:append("space:⋅")
 
 require("indent_blankline").setup {
     space_char_blankline = " ",
