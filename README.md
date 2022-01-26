@@ -16,7 +16,7 @@ This is a neovim configuration as a js/golang dev's daily driver.
 
 3. open nvim, do `:PlugInstall`
 
-4. You may need to do some extra things to get everything work: install lsp (`gopls`, `tsserver`, `efm` in this config), install `eslint_d`, install treesitter for specific language (pls refer to treesitter docs), install nerd fonts for proper icons, install ctags for tag support, install `bat` for nice fzf file preview.
+4. You may need to do some extra things to get everything work: install lsp (`gopls`, `tsserver`, `efm-language-server` in this config), install `eslint_d`, install treesitter for specific language (pls refer to treesitter docs), install nerd fonts for proper icons, install ctags for tag support, install `bat` for nice fzf file preview.
 
 ## Plugin Management
 

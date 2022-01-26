@@ -91,6 +91,8 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 " goto-preview
 Plug 'rmagatti/goto-preview'
+" luatab - simply a tabline lua port
+Plug 'alvarosevilla95/luatab.nvim'
 
 " end of plugins settings
 call plug#end()
@@ -116,4 +118,5 @@ lua require('my-lua-configs/telescope-configs')
 lua require('my-lua-configs/lualine-configs')
 lua require('my-lua-configs/nvim-tree-configs')
 lua require('my-lua-configs/goto-preview-configs')
+lua require('my-lua-configs/luatab-configs')
 lua require('my-lua-configs/vim-mappings-configs')
