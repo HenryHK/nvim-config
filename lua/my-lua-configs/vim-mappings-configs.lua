@@ -58,3 +58,8 @@ map('n', '<C-t>', '<cmd>Telescope tags<cr>')
 map('n', '<C-n>', ':NvimTreeToggle<CR>')
 map('n', '<leader>r', ':NvimTreeRefresh<CR>')
 map('n', '<leader>n', ':NvimTreeFindFile<CR>')
+
+map('n', 'gpd', '<cmd>lua require("goto-preview").goto_preview_definition()<CR>')
+map('n', 'gpi', '<cmd>lua require("goto-preview").goto_preview_implementation()<CR>')
+map('n', 'gP', '<cmd>lua require("goto-preview").close_all_win()<CR>')
+map('n', 'gpr', '<cmd>lua require("goto-preview").goto_preview_references()<CR>')
