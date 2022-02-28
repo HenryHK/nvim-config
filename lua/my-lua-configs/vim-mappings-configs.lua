@@ -2,8 +2,9 @@
 -- Mappings --
 --------------
 -- wrappers
-function map(mode, shortcut, command)
-  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
+function map(mode, shortcut, command, expr)
+  name = false or expr
+  vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true, expr=expr })
 end
 
 function nmap(shortcut, command)
@@ -37,10 +38,6 @@ map('n', '<S-Left>',  '<C-w><')
 -- tagbar
 map('n', '<F9>',  ':TagbarToggle<CR>')
 
--- nerdcomment
-map('n', 'gcc', ':call nerdcommenter#Comment("n", "Comment")<CR>')
-map('v', 'gcc', ':call nerdcommenter#Comment("n", "Comment")<CR>')
-
 -- gitgutter
 map('n', '<right><right>', ':GitGutterNextHunk<CR>')
 map('n', '<left><left>', ':GitGutterPrevHunk<CR>')
@@ -60,6 +57,9 @@ map('n', '<leader>r', ':NvimTreeRefresh<CR>')
 map('n', '<leader>n', ':NvimTreeFindFile<CR>')
 
 map('n', 'gpd', '<cmd>lua require("goto-preview").goto_preview_definition()<CR>')
+map('n', '<F12>', '<cmd>lua require("goto-preview").goto_preview_definition()<CR>')
 map('n', 'gpi', '<cmd>lua require("goto-preview").goto_preview_implementation()<CR>')
 map('n', 'gP', '<cmd>lua require("goto-preview").close_all_win()<CR>')
 map('n', 'gpr', '<cmd>lua require("goto-preview").goto_preview_references()<CR>')
+map('i', 'gpr', '<cmd>lua require("goto-preview").goto_preview_references()<CR>')
+map("i", "''", 'copilot#Accept("<CR>")', true)

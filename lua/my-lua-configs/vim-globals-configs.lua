@@ -50,3 +50,4 @@ vim.g.NERDSpaceDelims = 1
 -- Flutter Configuration I don't use this anymore
 -- vim.g.dart_style_guide = 2
 -- let dart_html_in_string=v:true
+vim.g.copilot_no_tab_map = 1

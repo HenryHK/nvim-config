@@ -2,9 +2,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 " fast commenting
-" See https://github.com/scrooloose/nerdcommenter
-" gcc to toggle comment
-Plug 'scrooloose/nerdcommenter'
+Plug 'numToStr/Comment.nvim'
 " Add spaces after comment delimiters by default
 
 " Surround is about change/add surroundings of code
@@ -94,6 +92,9 @@ Plug 'rmagatti/goto-preview'
 " luatab - simply a tabline lua port
 Plug 'alvarosevilla95/luatab.nvim'
 
+" copilot
+Plug 'github/copilot.vim'
+
 " end of plugins settings
 call plug#end()
 
@@ -118,5 +119,6 @@ lua require('my-lua-configs/telescope-configs')
 lua require('my-lua-configs/lualine-configs')
 lua require('my-lua-configs/nvim-tree-configs')
 lua require('my-lua-configs/goto-preview-configs')
+lua require('my-lua-configs/comment-configs')
 lua require('my-lua-configs/luatab-configs')
 lua require('my-lua-configs/vim-mappings-configs')
