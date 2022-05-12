@@ -24,7 +24,6 @@ vim.g.floaterm_wintitle=0
 vim.g.floaterm_autoclose=1
 
 -- nvim-tree settings
-vim.g.nvim_tree_indent_markers = 1 
 vim.g.nvim_tree_git_hl = 1 
 vim.g.nvim_tree_highlight_opened_files = 1 
 vim.g.nvim_tree_add_trailing = 1 
@@ -32,7 +31,6 @@ vim.g.nvim_tree_icon_padding = ' '
 vim.g.nvim_tree_symlink_arrow = ' >> ' 
 vim.g.nvim_tree_create_in_closed_folder = 0 
 vim.g.nvim_tree_refresh_wait = 1000 
-vim.g.nvim_tree_disable_window_picker = 1
 
 -- fzf settings
 vim.g.fzf_layout = { 
