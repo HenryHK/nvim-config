@@ -95,6 +95,9 @@ Plug 'alvarosevilla95/luatab.nvim'
 " copilot
 Plug 'github/copilot.vim'
 
+" browse.nvim
+Plug 'lalitmee/browse.nvim'
+
 " end of plugins settings
 call plug#end()
 
