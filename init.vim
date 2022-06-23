@@ -38,6 +38,8 @@ Plug 'majutsushi/tagbar'
 
 " vim go plugin
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" vim rust plugin
+Plug 'simrat39/rust-tools.nvim'
 
 " EasyFold only for Python
 Plug 'tmhedberg/SimpylFold'
@@ -58,6 +60,7 @@ Plug 'voldikss/vim-floaterm'
 
 " TreeSitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
 
 " wakatime
 Plug 'wakatime/vim-wakatime'
@@ -95,8 +98,6 @@ Plug 'alvarosevilla95/luatab.nvim'
 " copilot
 Plug 'github/copilot.vim'
 
-" browse.nvim
-Plug 'lalitmee/browse.nvim'
 
 " end of plugins settings
 call plug#end()
@@ -125,3 +126,4 @@ lua require('my-lua-configs/goto-preview-configs')
 lua require('my-lua-configs/comment-configs')
 lua require('my-lua-configs/luatab-configs')
 lua require('my-lua-configs/vim-mappings-configs')
+lua require('my-lua-configs/rust-tools')

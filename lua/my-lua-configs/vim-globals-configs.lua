@@ -49,3 +49,4 @@ vim.g.NERDSpaceDelims = 1
 -- vim.g.dart_style_guide = 2
 -- let dart_html_in_string=v:true
 vim.g.copilot_no_tab_map = 1
+vim.g.copilot_node_command = "/Users/lhan/.nvm/versions/node/v16.14.0/bin/node"
