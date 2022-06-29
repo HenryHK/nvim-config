@@ -40,12 +40,11 @@ Plug 'majutsushi/tagbar'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " vim rust plugin
 Plug 'simrat39/rust-tools.nvim'
+" debug
+Plug 'mfussenegger/nvim-dap'
 
 " EasyFold only for Python
 Plug 'tmhedberg/SimpylFold'
-
-" Vim JSON
-Plug 'elzr/vim-json'
 
 " session management
 Plug 'tpope/vim-obsession'
@@ -77,7 +76,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 " nvim-cmp tabnine
-Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
+" Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 " nvim-cmp lspkind
 Plug 'onsails/lspkind-nvim'
 " indent blankline
@@ -117,7 +116,6 @@ lua require('my-lua-configs/vim-cmd-configs')
 lua require('my-lua-configs/lsp-configs')
 lua require('my-lua-configs/treesitter-configs')
 lua require('my-lua-configs/cmp-configs')
-lua require('my-lua-configs/cmp-tabnine-configs')
 lua require('my-lua-configs/indent-blankline-configs')
 lua require('my-lua-configs/telescope-configs')
 lua require('my-lua-configs/lualine-configs')

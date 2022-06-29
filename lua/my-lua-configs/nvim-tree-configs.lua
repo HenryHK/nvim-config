@@ -1,5 +1,6 @@
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
+  create_in_closed_folder = false,
   auto_reload_on_write = true,
   disable_netrw = false,
   hijack_cursor = false,
@@ -39,7 +40,11 @@ require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
     icons = {
       webdev_colors = true,
       git_placement = "before",
-    }
+      padding = " ",
+      symlink_arrow = " >> ",
+    },
+    add_trailing = true,
+    highlight_git = true,
   },
   hijack_directories = {
     enable = true,
