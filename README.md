@@ -1,4 +1,4 @@
-# My Neovim Configuration on WSL2
+# My Neovim Configuration on WSL2 (I'm now using it on a shiny M1Max Macbook)
 
 ## Purpose
 
