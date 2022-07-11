@@ -1,4 +1,4 @@
-# My Neovim Configuration on WSL2
+# My Neovim Configuration on WSL2 (I'm now using it on a shiny M1Max Macbook)
 
 ## Purpose
 
@@ -16,7 +16,7 @@ This is a neovim configuration as a js/golang dev's daily driver.
 
 3. open nvim, do `:PlugInstall`
 
-4. You may need to do some extra things to get everything work: install lsp (`gopls`, `tsserver`, `efm-language-server` in this config), install `eslint_d`, install treesitter for specific language (pls refer to treesitter docs), install nerd fonts for proper icons, install ctags for tag support, install `bat` for nice fzf file preview.
+4. You may need to do some extra things to get everything work: install lsp (`gopls`, `tsserver`, `efm-language-server`, `rust-analyzer` in this config), install `eslint_d`, install treesitter for specific language (pls refer to treesitter docs), install nerd fonts for proper icons, install ctags for tag support, install `bat` for nice fzf file preview.
 
 ## Plugin Management
 
@@ -28,7 +28,7 @@ This is a neovim configuration as a js/golang dev's daily driver.
 
 Use [Vim-Plug](https://github.com/junegunn/vim-plug) as plugin manager. Install Vim-Plug first following instructions by the author of Vim-Plug.
 
-Copy the config into your `.vimrc` or `init.vim` (I didn't test this with Vim but most of the settings should be the same). Save it and reopen a vim instance (or :so %) to run `:PlugInstall` or `<leader>pi` to install all plugins.
+Copy the config into your ~~`.vimrc` or~~`init.vim` (~~I didn't test this with Vim but most of the settings should be the same~~ sorry Vim, but lua is so nice). Save it and reopen a nvim instance (or :so %) to run `:PlugInstall` or `<leader>pi` to install all plugins.
 
 To remove useless plugins, run `:PlugClean`.
 
@@ -52,7 +52,9 @@ You might need to install additional go packages to use full feature of [vim-go]
 A few useful shortcuts I use every day:
 
 ```
-* <F12>: Go to definition
+* <F12>: Show definition in a float window
+
+* <gd>: go to definition
 
 * >>/<<: Go to next function
 
@@ -71,7 +73,9 @@ Sometimes syntax highlighting has issues with complicated string templates.
 
 The TS/JS LSP works like a charm, the only shortcuts I use in my daily development is
 ```
-* <F12>: Go to definition
+* <F12>: Show definition in a float window
+
+* <gd>: go to definition
 ```
 
 One hassle I find after switching to native lsp is linting on jsx, it seems to me that [efm](https://github.com/mattn/efm-langserver) + [eslint_d](https://github.com/mantoni/eslint_d.js/) works alright, at least almost the same good as vscode.
@@ -80,7 +84,7 @@ One hassle I find after switching to native lsp is linting on jsx, it seems to m
 
 ### Leader Key
 
-I use `<space>` as leader key. The easy position makes it easy and encourages me to use it more.
+I use `<space>` as leader key. The handy position makes it easy to reach and encourages me to use it more.
 
 ### Esc
 
@@ -150,11 +154,11 @@ the status in gutter is provided by `vim-gitgutter`.
 ~~Since I use `fzf`/`fzf-vim` for most of my navigation, the configuration is part of the `fzf-vim`.~~ I use Telescope now for buffer, files etc., but this still works.
 
 ```
-1. <ctrl>-v: vertical split open from fzf window
+1. <ctrl>-v: vertical split open from fzf/telescope window
 
-2. <ctrl>-x: horizontal split open from fzf window
+2. <ctrl>-x: horizontal split open from fzf/telescope window
 
-3. <ctrl>-t: open from fzf window in another tab
+3. <ctrl>-t: open from fzf/telescope window in another tab
 ```
 
 For navigation:
@@ -197,9 +201,11 @@ Just use [it](https://github.com/nvim-treesitter/nvim-treesitter)! This is just 
 
 ### Fancy AI enhancements
 
-#### tabnine
+#### tabnine V.S. Copilot
 
-Since I'm using nvim-cmp so I just use the tabnine source provider for it. I also tried GitHub Copilot - it's really impressive but I don't like the lag. Sometimes I just want to tab indent and then it autocomplete a bunch code - tho the result is impressive but it's not really needed when I know what I'm gonna do. Tabnine is good enough.
+~~Since I'm using nvim-cmp so I just use the tabnine source provider for it. I also tried GitHub Copilot - it's really impressive but I don't like the lag. Sometimes I just want to tab indent and then it autocomplete a bunch code - tho the result is impressive but it's not really needed when I know what I'm gonna do. Tabnine is good enough.~~
+
+I'm using Copilot now.
 
 ### Lua V.S. Vimscript
 
