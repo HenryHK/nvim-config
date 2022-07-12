@@ -127,7 +127,7 @@ nnoremap <C-t> <cmd>Telescope tags<cr>
 
 Another one I'll use alongside with `<leader>f` is `:Telescope live_grep` which is precise search, like vscode one everyone likes.
 
-For js/jsx/tsx development, sometimes I find it handy to do `:Telescope lsp_workspace_diagnostics` or  `:Telescope lsp_document_diagnostics`. It's nice to have it all at one single place and you can check.
+For js/jsx/tsx development, sometimes I find it handy to do `:Telescope diagnostics`. It's nice to have it all at one single place and you can check.
 
 ### Git
 
