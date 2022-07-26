@@ -37,7 +37,7 @@ Plug 'APZelos/blamer.nvim'
 Plug 'majutsushi/tagbar'
 
 " vim go plugin
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'crispgm/nvim-go'
 " vim rust plugin
 Plug 'simrat39/rust-tools.nvim'
 " debug
@@ -125,3 +125,4 @@ lua require('my-lua-configs/comment-configs')
 lua require('my-lua-configs/luatab-configs')
 lua require('my-lua-configs/vim-mappings-configs')
 lua require('my-lua-configs/rust-tools')
+lua require('my-lua-configs/go-configs')

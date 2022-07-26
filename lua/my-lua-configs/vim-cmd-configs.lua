@@ -31,7 +31,12 @@ autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 noexpandtab
 autocmd BufNewFile,BufReadPost *.coffee setl tabstop=2 shiftwidth=2 expandtab foldmethod=manual
 autocmd FileType json syntax match Comment +\/\/.\+$+
 " golang
-autocmd BufWritePre *.go :GoBuild
+autocmd BufWritePre go.mod :!go mod tidy
+autocmd BufWritePre go.sum :!go mod tidy
+augroup NvimGo
+autocmd!
+autocmd User NvimGoLintPopupPost wincmd p
+augroup END
 
 " magic to fzf with git
 command! -bang Gbranch call fzf#run({ 'source': s:gitListRefs(), 'sink': function('s:gitCheckoutRef'), 'dir':expand('%:p:h') })
