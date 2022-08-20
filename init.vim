@@ -97,6 +97,8 @@ Plug 'alvarosevilla95/luatab.nvim'
 " copilot
 Plug 'github/copilot.vim'
 
+" lightspeed
+Plug 'ggandor/lightspeed.nvim'
 
 " end of plugins settings
 call plug#end()
