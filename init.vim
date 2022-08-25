@@ -100,6 +100,9 @@ Plug 'github/copilot.vim'
 " lightspeed
 Plug 'ggandor/lightspeed.nvim'
 
+" easy diff
+Plug 'sindrets/diffview.nvim'
+
 " end of plugins settings
 call plug#end()
 
@@ -125,6 +128,7 @@ lua require('my-lua-configs/nvim-tree-configs')
 lua require('my-lua-configs/goto-preview-configs')
 lua require('my-lua-configs/comment-configs')
 lua require('my-lua-configs/luatab-configs')
+lua require('my-lua-configs/diffview-configs')
 lua require('my-lua-configs/vim-mappings-configs')
 lua require('my-lua-configs/rust-tools')
 lua require('my-lua-configs/go-configs')
