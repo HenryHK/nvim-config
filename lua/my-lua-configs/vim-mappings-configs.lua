@@ -63,3 +63,6 @@ map('n', 'gP', '<cmd>lua require("goto-preview").close_all_win()<CR>')
 map('n', 'gpr', '<cmd>lua require("goto-preview").goto_preview_references()<CR>')
 map('i', 'gpr', '<cmd>lua require("goto-preview").goto_preview_references()<CR>')
 map("i", "''", 'copilot#Accept("<CR>")', true)
+-- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+map('n', 'zR', 'lua require("ufo").openAllFolds')
+map('n', 'zM', 'lua require("ufo").closeAllFolds')

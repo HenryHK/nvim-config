@@ -101,6 +101,10 @@ Plug 'ggandor/lightspeed.nvim'
 " easy diff
 Plug 'sindrets/diffview.nvim'
 
+" better fold
+Plug 'kevinhwang91/promise-async'
+Plug 'kevinhwang91/nvim-ufo'
+
 " end of plugins settings
 call plug#end()
 
@@ -131,3 +135,4 @@ lua require('my-lua-configs/vim-mappings-configs')
 lua require('my-lua-configs/rust-tools')
 lua require('my-lua-configs/go-configs')
 lua require('my-lua-configs/nvim-surround-configs')
+lua require('my-lua-configs/ufo-configs')

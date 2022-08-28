@@ -17,7 +17,11 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     'additionalTextEdits',
   },
 }
-local cmp_capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
+local cmp_capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local format_async = function(err, _, result, _, bufnr)
     if err ~= nil or result == nil then return end
