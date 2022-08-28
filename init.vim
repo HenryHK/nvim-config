@@ -3,13 +3,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " fast commenting
 Plug 'numToStr/Comment.nvim'
-" Add spaces after comment delimiters by default
 
-" Surround is about change/add surroundings of code
-" See https://github.com/tpope/vim-surround
-Plug 'git://github.com/tpope/vim-surround.git'
-" for repeat -> enhance surround.vim, . to repeat command
-Plug 'tpope/vim-repeat'
+" surround plugin
+Plug 'kylechui/nvim-surround'
 
 " fuzzy search everything utilizing fzf
 " if fzf is installed via homebrew
@@ -60,6 +56,8 @@ Plug 'voldikss/vim-floaterm'
 " TreeSitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 
 " wakatime
 Plug 'wakatime/vim-wakatime'
@@ -132,3 +130,4 @@ lua require('my-lua-configs/diffview-configs')
 lua require('my-lua-configs/vim-mappings-configs')
 lua require('my-lua-configs/rust-tools')
 lua require('my-lua-configs/go-configs')
+lua require('my-lua-configs/nvim-surround-configs')
