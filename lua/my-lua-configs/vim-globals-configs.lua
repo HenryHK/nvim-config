@@ -4,12 +4,7 @@
 vim.g.mapleader = " "
 
 -- vim-go
-vim.g.go_fmt_command = "goimports"
-vim.g.go_auto_type_info = 1
-vim.g.go_addtags_transform = "snakecase"
-vim.g.go_def_mode = 'gopls'
-vim.g.go_info_mode = 'gopls'
-vim.g.go_metalinter_command='golangci-lint run --print-issued-lines=false --build-tags --exclude-use-default=use'
+-- vim.g.go_metalinter_command='golangci-lint run --print-issued-lines=false --build-tags --exclude-use-default=use'
 
 -- floatterm settings
 vim.g.floaterm_keymap_toggle = '<F1>'
@@ -24,7 +19,7 @@ vim.g.floaterm_wintitle=0
 vim.g.floaterm_autoclose=1
 
 -- fzf settings
-vim.g.fzf_layout = { 
+vim.g.fzf_layout = {
     down = '~50%',
 }
 vim.env.BAT_THEME = 'TwoDark'

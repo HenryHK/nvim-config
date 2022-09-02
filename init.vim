@@ -33,6 +33,8 @@ Plug 'APZelos/blamer.nvim'
 Plug 'majutsushi/tagbar'
 
 " vim go plugin
+"" (optional) if you enable nvim-notify
+Plug 'rcarriga/nvim-notify'
 Plug 'crispgm/nvim-go'
 " vim rust plugin
 Plug 'simrat39/rust-tools.nvim'
@@ -104,6 +106,9 @@ Plug 'sindrets/diffview.nvim'
 " better fold
 Plug 'kevinhwang91/promise-async'
 Plug 'kevinhwang91/nvim-ufo'
+
+" neovim lua dev
+Plug 'folke/lua-dev.nvim'
 
 " end of plugins settings
 call plug#end()
