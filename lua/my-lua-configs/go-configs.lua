@@ -1,6 +1,6 @@
 require('go').setup({
     -- notify: use nvim-notify
-    notify = false,
+    notify = true,
     -- auto commands
     auto_format = true,
     auto_lint = true,
@@ -11,7 +11,7 @@ require('go').setup({
     -- lint_prompt_style: qf (quickfix), vt (virtual text)
     lint_prompt_style = 'qf',
     -- formatter: goimports, gofmt, gofumpt
-    formatter = 'goimports',
+    formatter = 'gofmt',
     -- maintain cursor position after formatting loaded buffer
     maintain_cursor_pos = false,
     -- test flags: -count=1 will disable cache
