@@ -23,21 +23,9 @@ capabilities.textDocument.foldingRange = {
 }
 local cmp_capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-local format_async = function(err, _, result, _, bufnr)
-    if err ~= nil or result == nil then return end
-    if not vim.api.nvim_buf_get_option(bufnr, "modified") then
-        local view = vim.fn.winsaveview()
-        vim.lsp.util.apply_text_edits(result, bufnr)
-        vim.fn.winrestview(view)
-        if bufnr == vim.api.nvim_get_current_buf() then vim.api.nvim_command("noautocmd :update") end
-    end
-end
-
-vim.lsp.handlers["textDocument/formatting"] = format_async
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach_base = function(client, bufnr)
+local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -78,7 +66,7 @@ local on_attach_base = function(client, bufnr)
       vim.api.nvim_exec([[
        augroup LspAutocommands
            autocmd! * <buffer>
-           autocmd BufWritePost <buffer> LspFormatting
+           autocmd BufWritePre <buffer> LspFormatting
        augroup END
        ]], true)
   end
@@ -89,13 +77,13 @@ end
 -- golang
 nvim_lsp['gopls'].setup {
     capabilities = cmp_capabilities,
-    on_attach = on_attach_base,
+    on_attach = on_attach,
 }
 
--- js
+-- js/ts/jsx/tsx
 nvim_lsp['tsserver'].setup {
     capabilities = cmp_capabilities,
-    on_attach = on_attach_base,
+    on_attach = on_attach,
     handlers = {
         ['textDocument/publishDiagnostics'] = function(...) end --disable tsserver diagnostics as we use efm now
     },
@@ -128,7 +116,6 @@ local efm_languages = {
   scss = { prettier },
   sass = { prettier },
   less = { prettier },
-  json = { prettier },
   html = { prettier }
 }
 
@@ -139,7 +126,7 @@ nvim_lsp['efm'].setup {
         languages = efm_languages,
     },
     capabilities = capabilities,
-    on_attach = on_attach_base,
+    on_attach = on_attach,
     filetypes = {
         'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx', 'json', 'html'
     },
