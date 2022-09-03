@@ -33,6 +33,19 @@ telescope.setup{
             ["<s-tab>"] = actions.toggle_selection + actions.move_selection_previous,
             ["<cr>"] = custom_actions.fzf_multi_select
         }
+    },
+    layout_config={
+        horizontal = {
+            prompt_position = "top",
+            preview_width = 0.55,
+            results_width = 0.8,
+        },
+        vertical = {
+            mirror = false,
+        },
+        width = 0.87,
+        height = 0.80,
+        preview_cutoff = 120,
     }
   },
   extensions = {
