@@ -7,11 +7,6 @@ Plug 'numToStr/Comment.nvim'
 " surround plugin
 Plug 'kylechui/nvim-surround'
 
-" fuzzy search everything utilizing fzf
-" if fzf is installed via homebrew
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
 " nvim-tree - to replce nerdtree
 Plug 'kyazdani42/nvim-tree.lua'
 
