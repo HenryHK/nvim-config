@@ -105,6 +105,9 @@ Plug 'kevinhwang91/nvim-ufo'
 " neovim lua dev
 Plug 'folke/lua-dev.nvim'
 
+" flutter
+Plug 'akinsho/flutter-tools.nvim'
+
 " end of plugins settings
 call plug#end()
 
@@ -136,3 +139,4 @@ lua require('my-lua-configs/rust-tools')
 lua require('my-lua-configs/go-configs')
 lua require('my-lua-configs/nvim-surround-configs')
 lua require('my-lua-configs/ufo-configs')
+lua require('my-lua-configs/flutter-configs')
