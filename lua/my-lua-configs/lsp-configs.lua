@@ -17,11 +17,11 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     'additionalTextEdits',
   },
 }
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
     lineFoldingOnly = true
 }
-local cmp_capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -76,13 +76,13 @@ end
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 -- golang
 nvim_lsp['gopls'].setup {
-    capabilities = cmp_capabilities,
+    capabilities = capabilities,
     on_attach = on_attach,
 }
 
 -- js/ts/jsx/tsx
 nvim_lsp['tsserver'].setup {
-    capabilities = cmp_capabilities,
+    capabilities = capabilities,
     on_attach = on_attach,
     handlers = {
         ['textDocument/publishDiagnostics'] = function(...) end --disable tsserver diagnostics as we use efm now
@@ -133,5 +133,7 @@ nvim_lsp['efm'].setup {
 }
 
 -- neovim lua dev
-local luadev = require("lua-dev").setup()
+local luadev = require("lua-dev").setup {
+    capabilities = capabilities,
+}
 nvim_lsp.sumneko_lua.setup(luadev)
