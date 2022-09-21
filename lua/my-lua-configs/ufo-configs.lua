@@ -25,10 +25,38 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
     table.insert(newVirtText, {suffix, 'MoreMsg'})
     return newVirtText
 end
+-- lsp->treesitter->indent
+
+local ftMap = {
+    vim = 'indent',
+    python = {'indent'},
+    git = '',
+}
+
+local function customizeSelector(bufnr)
+    local function handleFallbackException(err, providerName)
+        if type(err) == 'string' and err:match('UfoFallbackException') then
+            return require('ufo').getFolds(bufnr, providerName)
+        elseif type(err) == 'table' then -- golang lsp is returning a table from rpc
+            return require('ufo').getFolds(bufnr, providerName)
+        else
+            return require('promise').reject(err)
+        end
+    end
+
+    return require('ufo').getFolds(bufnr, 'lsp'):catch(function(err)
+        return handleFallbackException(err, 'treesitter')
+    end):catch(function(err)
+        return handleFallbackException(err, 'indent')
+    end)
+end
 
 -- global handler
 require('ufo').setup({
-    fold_virt_text_handler = handler
+    fold_virt_text_handler = handler,
+    provider_selector = function(_, filetype, _)
+        return ftMap[filetype] or customizeSelector
+    end
 })
 
 -- buffer scope handler
