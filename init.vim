@@ -108,6 +108,8 @@ Plug 'folke/lua-dev.nvim'
 " flutter
 Plug 'akinsho/flutter-tools.nvim'
 
+" tagbar nvim alt
+Plug 'simrat39/symbols-outline.nvim'
 " end of plugins settings
 call plug#end()
 
@@ -122,7 +124,6 @@ EOF
 " import lua config
 lua require('my-lua-configs/vim-globals-configs')
 lua require('my-lua-configs/vim-options-configs')
-lua require('my-lua-configs/vim-cmd-configs')
 lua require('my-lua-configs/lsp-configs')
 lua require('my-lua-configs/treesitter-configs')
 lua require('my-lua-configs/cmp-configs')
@@ -140,3 +141,7 @@ lua require('my-lua-configs/go-configs')
 lua require('my-lua-configs/nvim-surround-configs')
 lua require('my-lua-configs/ufo-configs')
 lua require('my-lua-configs/flutter-configs')
+lua require('my-lua-configs/tokyonight-configs')
+lua require('my-lua-configs/symbols-outline-configs')
+
+lua require('my-lua-configs/vim-cmd-configs')

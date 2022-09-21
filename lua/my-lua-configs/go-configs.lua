@@ -27,7 +27,7 @@ require('go').setup({
     test_open_cmd = 'edit',
     -- struct tags
     tags_name = 'json',
-    tags_options = {'json=omitempty'},
+    tags_options = {},
     tags_transform = 'snakecase',
     tags_flags = {'-skip-unexported'},
     -- quick type

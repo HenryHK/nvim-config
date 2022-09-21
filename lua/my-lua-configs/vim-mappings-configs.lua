@@ -48,7 +48,7 @@ map('n', '<leader>f', '<cmd>lua require "telescope.builtin".grep_string{ shorten
 map('n', '<C-p>', '<cmd>Telescope find_files<cr>')
 map('n', '<C-g>', '<cmd>Telescope git_status<cr>')
 map('n', '<C-e>', '<cmd>Telescope buffers<cr>')
-map('n', '<C-t>', '<cmd>Telescope tags<cr>')
+map('n', '<C-t>', '<cmd>SymbolsOutline<cr>')
 
 map('n', '<C-n>', ':NvimTreeToggle<CR>')
 map('n', '<leader>r', ':NvimTreeRefresh<CR>')

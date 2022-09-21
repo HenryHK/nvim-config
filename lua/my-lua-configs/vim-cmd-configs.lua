@@ -11,7 +11,8 @@ filetype plugin indent on
 
 " colorscheme
 " colorscheme gruvbox
-colorscheme tokyonight
+colorscheme tokyonight-night
+
 
 " abosolute line number in normal mode
 " relative line number in insert mode
