@@ -2,22 +2,22 @@
 -- Mappings --
 --------------
 -- wrappers
-function map(mode, shortcut, command, expr)
-  name = false or expr
+local function map(mode, shortcut, command, expr)
+  local name = false or expr
   vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true, expr=expr })
 end
 
-function nmap(shortcut, command)
+local function nmap(shortcut, command)
   map('n', shortcut, command)
 end
 
-function imap(shortcut, command)
+local function imap(shortcut, command)
   map('i', shortcut, command)
 end
 
 -- remap <ESC>
 map('i', 'jj', '<ESC>')
-map('', '<ESC><ESC>', ':noh<return>') 
+map('', '<ESC><ESC>', ':noh<return>')
 
 -- indentation move
 map('v', '<', '<gv')

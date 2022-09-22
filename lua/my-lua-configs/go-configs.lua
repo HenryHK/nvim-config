@@ -1,9 +1,9 @@
 require('go').setup({
     -- notify: use nvim-notify
-    notify = true,
+    notify = false,
     -- auto commands
     auto_format = true,
-    auto_lint = true,
+    auto_lint = false,
     -- linters: revive, errcheck, staticcheck, golangci-lint
     linter = 'golangci-lint',
     -- linter_flags: e.g., {revive = {'-config', '/path/to/config.yml'}}
@@ -21,8 +21,8 @@ require('go').setup({
     -- show test result with popup window
     test_popup = true,
     test_popup_auto_leave = false,
-    test_popup_width = 80,
-    test_popup_height = 10,
+    test_popup_width = 140,
+    test_popup_height = 20,
     -- test open
     test_open_cmd = 'edit',
     -- struct tags

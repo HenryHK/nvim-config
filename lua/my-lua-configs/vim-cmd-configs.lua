@@ -10,7 +10,6 @@ filetype plugin on
 filetype plugin indent on
 
 " colorscheme
-" colorscheme gruvbox
 colorscheme tokyonight-night
 
 
@@ -31,14 +30,6 @@ autocmd FileType javascript.jsx setlocal tabstop=2 shiftwidth=2 noexpandtab
 autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 noexpandtab
 autocmd BufNewFile,BufReadPost *.coffee setl tabstop=2 shiftwidth=2 expandtab foldmethod=manual
 autocmd FileType json syntax match Comment +\/\/.\+$+
-" golang
-augroup NvimGo
-    autocmd!
-    autocmd User NvimGoLintPopupPost wincmd p
-augroup END
-
-" magic to fzf with git
-command! -bang Gbranch call fzf#run({ 'source': s:gitListRefs(), 'sink': function('s:gitCheckoutRef'), 'dir':expand('%:p:h') })
 
 augroup checktime
     autocmd!
