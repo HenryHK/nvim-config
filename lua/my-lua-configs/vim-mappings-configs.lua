@@ -3,7 +3,6 @@
 --------------
 -- wrappers
 local function map(mode, shortcut, command, expr)
-  local name = false or expr
   vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true, expr=expr })
 end
 
@@ -59,8 +58,10 @@ map('n', '<F12>', '<cmd>lua require("goto-preview").goto_preview_definition()<CR
 map('n', 'gpi', '<cmd>lua require("goto-preview").goto_preview_implementation()<CR>')
 map('n', 'gP', '<cmd>lua require("goto-preview").close_all_win()<CR>')
 map('n', 'gpr', '<cmd>lua require("goto-preview").goto_preview_references()<CR>')
-map('i', 'gpr', '<cmd>lua require("goto-preview").goto_preview_references()<CR>')
+imap('gpr', '<cmd>lua require("goto-preview").goto_preview_references()<CR>')
 map("i", "''", 'copilot#Accept("<CR>")', true)
 -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
 map('n', 'zR', 'lua require("ufo").openAllFolds')
 map('n', 'zM', 'lua require("ufo").closeAllFolds')
+-- trouble
+nmap('<C-d>', ':TroubleToggle<CR>')

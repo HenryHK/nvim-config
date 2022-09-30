@@ -110,6 +110,11 @@ Plug 'akinsho/flutter-tools.nvim'
 
 " tagbar nvim alt
 Plug 'simrat39/symbols-outline.nvim'
+
+" trouble - show problems in a grouped place to avoid annoying virtual text
+" hiding issue
+Plug 'folke/trouble.nvim'
+
 " end of plugins settings
 call plug#end()
 
@@ -143,5 +148,6 @@ lua require('my-lua-configs/ufo-configs')
 lua require('my-lua-configs/flutter-configs')
 lua require('my-lua-configs/tokyonight-configs')
 lua require('my-lua-configs/symbols-outline-configs')
+lua require('my-lua-configs/trouble-configs')
 
 lua require('my-lua-configs/vim-cmd-configs')
