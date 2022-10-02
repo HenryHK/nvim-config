@@ -110,7 +110,7 @@ Functions:
 1. <leader>f: text fuzzy search 
 ```
 
-Now I only use fzf for fuzzy global text search.
+Now I only use telescope for fuzzy global text search.
 
 #### Telescope
 
