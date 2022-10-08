@@ -52,17 +52,17 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', 'F', '<cmd>lua vim.lsp.buf.formatting_sync()<CR>', opts)
+  buf_set_keymap('n', 'F', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
 
   require "lsp_signature".on_attach()
 
   if client.name ~= 'efm' then
-      client.resolved_capabilities.document_formatting = false
-      client.resolved_capabilities.document_range_formatting = false
+      client.server_capabilities.documentFormattingProvider= false
+      client.server_capabilities.documentRangeFormattingProvide = false
   end
 
   vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting_sync(nil, 2000)")
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.document_formatting then
       vim.api.nvim_exec([[
        augroup LspAutocommands
            autocmd! * <buffer>
