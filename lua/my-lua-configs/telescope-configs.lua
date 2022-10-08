@@ -48,6 +48,13 @@ telescope.setup{
         preview_cutoff = 120,
     }
   },
+  pickers = {
+    live_grep = {
+      mappings = {
+        i = { ["<c-f>"] = actions.to_fuzzy_refine },
+      },
+    },
+  },
   extensions = {
     fzf = {
       fuzzy = true,
