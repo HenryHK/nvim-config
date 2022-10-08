@@ -61,8 +61,8 @@ local on_attach = function(client, bufnr)
       client.server_capabilities.documentRangeFormattingProvide = false
   end
 
-  vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting_sync(nil, 2000)")
-  if client.server_capabilities.document_formatting then
+  vim.cmd("command! LspFormatting lua vim.lsp.buf.format()")
+  if client.name == 'efm' then
       vim.api.nvim_exec([[
        augroup LspAutocommands
            autocmd! * <buffer>
@@ -120,7 +120,6 @@ local efm_languages = {
 }
 
 nvim_lsp['efm'].setup {
-    init_options = {documentFormatting = true},
     settings = {
         rootMarkers = {'.git/', 'package.json', '.zshrc'},
         languages = efm_languages,
