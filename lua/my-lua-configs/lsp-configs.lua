@@ -124,6 +124,7 @@ nvim_lsp['efm'].setup {
         rootMarkers = {'.git/', 'package.json', '.zshrc'},
         languages = efm_languages,
     },
+    init_options = {documentFormatting = true},
     capabilities = capabilities,
     on_attach = on_attach,
     filetypes = {

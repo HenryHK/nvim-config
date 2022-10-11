@@ -28,6 +28,7 @@ vim.o.foldenable = true
 vim.opt.synmaxcol = 0
 vim.opt.termguicolors = true
 vim.opt.signcolumn = 'yes' -- always show signcolumns
+vim.opt.laststatus = 0 -- hide status line completely, we now use lualine on winbar
 
 -- clipboard setting
 -- See https://stackoverflow.com/questions/11489428/how-to-make-vim-paste-from-and-copy-to-systems-clipboard

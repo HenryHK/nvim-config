@@ -3,7 +3,9 @@ require('lualine').setup {
     options = {
         theme = 'tokyonight',
     },
-    sections = {
+    sections = {},
+    inactive_sections={ },
+    winbar = {
         lualine_a = {
             {
               'filename',
@@ -15,7 +17,7 @@ require('lualine').setup {
         lualine_c = {'diagnostics'},
         lualine_x = {'encoding', 'filetype'},
     },
-    inactive_sections={
+    inactive_winbar={
         lualine_a = {{'filename', file_status = true, path = 1}},
         lualine_b = {},
         lualine_c = {},
