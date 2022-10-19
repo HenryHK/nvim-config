@@ -1,3 +1,8 @@
+-- setup neodev before lspconfig
+require("neodev").setup({
+  -- add any options here, or leave empty to use the default settings
+})
+
 -- nvim lsp config
 local nvim_lsp = require('lspconfig')
 
@@ -17,7 +22,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     'additionalTextEdits',
   },
 }
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
     lineFoldingOnly = true
@@ -132,8 +137,12 @@ nvim_lsp['efm'].setup {
     },
 }
 
--- neovim lua dev
-local luadev = require("lua-dev").setup {
-    capabilities = capabilities,
-}
-nvim_lsp.sumneko_lua.setup(luadev)
+nvim_lsp.sumneko_lua.setup({
+  settings = {
+    Lua = {
+      completion = {
+        callSnippet = "Replace"
+      }
+    }
+  }
+})

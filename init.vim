@@ -102,8 +102,8 @@ Plug 'sindrets/diffview.nvim'
 Plug 'kevinhwang91/promise-async'
 Plug 'kevinhwang91/nvim-ufo'
 
-" neovim lua dev
-Plug 'folke/lua-dev.nvim'
+" neovim lua dev, used to cal lua-dev
+Plug 'folke/neodev.nvim'
 
 " flutter
 Plug 'akinsho/flutter-tools.nvim'

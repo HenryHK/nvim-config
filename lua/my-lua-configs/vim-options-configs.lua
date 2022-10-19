@@ -2,7 +2,7 @@
 -- Options --
 -------------
 vim.opt.compatible = false
-vim.opt.background = 'dark' -- or light if you want light mode
+-- vim.opt.background = 'dark' -- or light if you want light mode
 vim.opt.cursorcolumn = false-- improve neovim performance slightly
 vim.opt.cursorline = false-- improve neovim performance slightly
 vim.opt.scrolljump = 5 -- vim.opt.layout format
@@ -12,7 +12,7 @@ vim.opt.tabstop = 4 -- use space to all tab, vim.opt.indentation to 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.number = true -- turn on line number
-vim.opt.lazyredraw = true -- turn on lazy redraw to improve big regex etc.
+-- vim.opt.lazyredraw = true -- turn on lazy redraw to improve big regex etc.
 vim.opt.incsearch = true -- find as typing
 vim.opt.hlsearch = true -- highlight search terms
 vim.opt.ignorecase = true -- ignore case when searching
@@ -39,4 +39,5 @@ if vim.fn.has('clipboard') == 1 then
     vim.opt.clipboard="unnamed"
   end
 end
+
 
