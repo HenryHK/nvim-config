@@ -36,9 +36,6 @@ Plug 'simrat39/rust-tools.nvim'
 " debug
 Plug 'mfussenegger/nvim-dap'
 
-" EasyFold only for Python
-Plug 'tmhedberg/SimpylFold'
-
 " session management
 Plug 'tpope/vim-obsession'
 
@@ -114,8 +111,10 @@ Plug 'simrat39/symbols-outline.nvim'
 " trouble - show problems in a grouped place to avoid annoying virtual text
 " hiding issue
 Plug 'folke/trouble.nvim'
-Plug 'folke/noice.nvim'
+" Plug 'folke/noice.nvim'
 Plug 'MunifTanjim/nui.nvim',
+
+Plug 'glepnir/dashboard-nvim'
 
 " end of plugins settings
 call plug#end()
@@ -151,6 +150,7 @@ lua require('my-lua-configs/flutter-configs')
 lua require('my-lua-configs/tokyonight-configs')
 lua require('my-lua-configs/symbols-outline-configs')
 lua require('my-lua-configs/trouble-configs')
-lua require('my-lua-configs/noice-configs')
+" lua require('my-lua-configs/noice-configs')
+lua require('my-lua-configs/dashboard-configs')
 
 lua require('my-lua-configs/vim-cmd-configs')

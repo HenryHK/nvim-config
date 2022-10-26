@@ -61,7 +61,7 @@ map('n', 'gpr', '<cmd>lua require("goto-preview").goto_preview_references()<CR>'
 imap('gpr', '<cmd>lua require("goto-preview").goto_preview_references()<CR>')
 map("i", "''", 'copilot#Accept("<CR>")', true)
 -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-map('n', 'zR', 'lua require("ufo").openAllFolds')
-map('n', 'zM', 'lua require("ufo").closeAllFolds')
+map('n', 'zR', '<cmd>lua require("ufo").openAllFolds()<CR>')
+map('n', 'zM', '<cmd>lua require("ufo").closeAllFolds()<CR>')
 -- trouble
 nmap('<C-d>', ':TroubleToggle<CR>')

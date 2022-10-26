@@ -3,9 +3,13 @@ require('lualine').setup {
     options = {
         theme = 'tokyonight',
     },
-    sections = {},
-    inactive_sections={ },
     winbar = {
+        lualine_a = {
+            "require('my-lua-configs.treesitter-configs').context()",
+        },
+    },
+    -- inactive_sections={ },
+    sections = {
         lualine_a = {
             {
               'filename',
@@ -17,7 +21,7 @@ require('lualine').setup {
         lualine_c = {'diagnostics'},
         lualine_x = {'encoding', 'filetype'},
     },
-    inactive_winbar={
+    inactive_sections={
         lualine_a = {{'filename', file_status = true, path = 1}},
         lualine_b = {},
         lualine_c = {},
