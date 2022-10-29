@@ -69,15 +69,13 @@ local treesitter_context = function(width)
   local type_patterns = {
     "class",
     "function",
-    "method",
-    "interface",
-    "type_spec",
-    "table",
-    "if_statement",
-    "for_statement",
-    "for_in_statement",
-    "call_expression",
-    "comment",
+    'method',
+    'for',
+    'while',
+    'if',
+    'switch',
+    'case',
+    'interface',
   }
 
   if vim.o.ft == "json" then
@@ -87,10 +85,15 @@ local treesitter_context = function(width)
   local f = require("nvim-treesitter").statusline({
     indicator_size = width,
     type_patterns = type_patterns,
+    transform_fn = function (line)
+        line = line:gsub('%s*[%[%(%{]*%s*$', '')
+        local r = vim.fn.substitute(line, "\\((.\\{-})\\)", "", "g")
+        r = vim.fn.substitute(r, "  ", " ", "g")
+        return r
+    end,
   })
   local context = string.format("%s", f) -- convert to string, it may be a empty ts node
 
-  -- lprint(context)
   if context == "vim.NIL" then
     return " "
   end

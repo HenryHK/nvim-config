@@ -4,8 +4,8 @@ require('lualine').setup {
         theme = 'tokyonight',
     },
     winbar = {
-        lualine_a = {
-            "require('my-lua-configs.treesitter-configs').context()",
+        lualine_c = {
+            "require('my-lua-configs.treesitter-configs').context(200)",
         },
     },
     -- inactive_sections={ },
