@@ -5,15 +5,17 @@ require('noice').setup({
     opts = { enter = true, format = "details" },
     filter = { event = { "msg_show", "notify" }, ["not"] = { kind = { "search_count", "echo" } } },
   },
-  lsp_progress = {
-    enabled = true,
-    -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
-    -- See the section on formatting for more details on how to customize.
-    --- @type NoiceFormat|string
-    format = "lsp_progress",
-    --- @type NoiceFormat|string
-    format_done = "lsp_progress_done",
-    throttle = 1000 / 30, -- frequency to update lsp progress message
+  lsp = {
+    signature = {
+      enabled = false,
+    },
+    progress = {
+      enabled = true,
+      format = "lsp_progress",
+      format_done = "lsp_progress_done",
+      throttle = 1000 / 30, -- frequency to update lsp progress message
+      view = "mini",
+    },
   },
   views = {
     popupmenu = {
