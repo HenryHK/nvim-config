@@ -81,6 +81,10 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
+" fzf is still the king to do big fuzzy text search
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+
 " goto-preview
 Plug 'rmagatti/goto-preview'
 " luatab - simply a tabline lua port
@@ -114,7 +118,7 @@ Plug 'folke/trouble.nvim'
 Plug 'folke/noice.nvim'
 Plug 'MunifTanjim/nui.nvim',
 
-Plug 'glepnir/dashboard-nvim'
+Plug 'goolord/alpha-nvim'
 
 " end of plugins settings
 call plug#end()
@@ -151,6 +155,6 @@ lua require('my-lua-configs/tokyonight-configs')
 lua require('my-lua-configs/symbols-outline-configs')
 lua require('my-lua-configs/trouble-configs')
 lua require('my-lua-configs/noice-configs')
-lua require('my-lua-configs/dashboard-configs')
+lua require('my-lua-configs/alpha-configs')
 
 lua require('my-lua-configs/vim-cmd-configs')

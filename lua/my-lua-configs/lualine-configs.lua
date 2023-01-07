@@ -3,18 +3,18 @@ require('lualine').setup {
     options = {
         theme = 'tokyonight',
     },
-    winbar = {
-        lualine_c = {
-            "require('my-lua-configs.treesitter-configs').context(200)",
-        },
-    },
+    -- winbar = {
+    --     lualine_c = {
+    --         "require('my-lua-configs.treesitter-configs').context(200)",
+    --     },
+    -- },
     -- inactive_sections={ },
     sections = {
         lualine_a = {
             {
               'filename',
               file_status = true, -- displays file status (readonly status, modified status)
-              path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
+              path = 2 -- 0 = just filename, 1 = relative path, 2 = absolute path
             }
         },
         lualine_b = {'branch', 'diff', },
