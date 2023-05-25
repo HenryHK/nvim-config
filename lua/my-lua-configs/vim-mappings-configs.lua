@@ -1,4 +1,4 @@
---------------
+--------------mapping
 -- Mappings --
 --------------
 -- wrappers
@@ -50,9 +50,9 @@ map('n', '<C-g>', '<cmd>Telescope git_status<cr>')
 map('n', '<C-e>', '<cmd>Telescope buffers<cr>')
 map('n', '<C-t>', '<cmd>SymbolsOutline<cr>')
 
-map('n', '<C-n>', ':NvimTreeToggle<CR>')
-map('n', '<leader>r', ':NvimTreeRefresh<CR>')
-map('n', '<leader>n', ':NvimTreeFindFile<CR>')
+map('n', '<C-n>', ':Neotree toggle<CR>')
+-- map('n', '<leader>r', ':NvimTreeRefresh<CR>')
+-- map('n', '<leader>n', ':NvimTreeFindFile<CR>')
 
 map('n', 'gpd', '<cmd>lua require("goto-preview").goto_preview_definition()<CR>')
 map('n', '<F12>', '<cmd>lua require("goto-preview").goto_preview_definition()<CR>')

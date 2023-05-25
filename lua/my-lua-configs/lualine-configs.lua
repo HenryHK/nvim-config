@@ -1,7 +1,7 @@
 -- lualine
 require('lualine').setup {
     options = {
-        theme = 'tokyonight',
+        theme = 'gruvbox',
     },
     -- winbar = {
     --     lualine_c = {

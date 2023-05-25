@@ -10,7 +10,7 @@ filetype plugin on
 filetype plugin indent on
 
 " colorscheme
-colorscheme tokyonight-storm
+colorscheme gruvbox
 
 
 " abosolute line number in normal mode

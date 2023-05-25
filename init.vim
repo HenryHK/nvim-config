@@ -8,7 +8,9 @@ Plug 'numToStr/Comment.nvim'
 Plug 'kylechui/nvim-surround'
 
 " nvim-tree - to replce nerdtree
-Plug 'kyazdani42/nvim-tree.lua'
+" Plug 'kyazdani42/nvim-tree.lua'
+Plug 'nvim-neo-tree/neo-tree.nvim'
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
 " lualine - to replace airline
 Plug 'nvim-lualine/lualine.nvim'
@@ -88,7 +90,7 @@ Plug 'junegunn/fzf.vim'
 " goto-preview
 Plug 'rmagatti/goto-preview'
 " luatab - simply a tabline lua port
-Plug 'alvarosevilla95/luatab.nvim'
+" Plug 'alvarosevilla95/luatab.nvim'
 
 " copilot
 Plug 'github/copilot.vim'
@@ -119,6 +121,7 @@ Plug 'folke/noice.nvim'
 Plug 'MunifTanjim/nui.nvim',
 
 Plug 'goolord/alpha-nvim'
+Plug 'folke/which-key.nvim'
 
 " end of plugins settings
 call plug#end()
@@ -139,11 +142,8 @@ lua require('my-lua-configs/treesitter-configs')
 lua require('my-lua-configs/cmp-configs')
 lua require('my-lua-configs/indent-blankline-configs')
 lua require('my-lua-configs/telescope-configs')
-lua require('my-lua-configs/lualine-configs')
-lua require('my-lua-configs/nvim-tree-configs')
 lua require('my-lua-configs/goto-preview-configs')
 lua require('my-lua-configs/comment-configs')
-lua require('my-lua-configs/luatab-configs')
 lua require('my-lua-configs/diffview-configs')
 lua require('my-lua-configs/vim-mappings-configs')
 lua require('my-lua-configs/rust-tools')
@@ -156,5 +156,9 @@ lua require('my-lua-configs/symbols-outline-configs')
 lua require('my-lua-configs/trouble-configs')
 lua require('my-lua-configs/noice-configs')
 lua require('my-lua-configs/alpha-configs')
+lua require('my-lua-configs/which-key-configs')
+lua require('my-lua-configs/bufferline-configs')
+lua require('my-lua-configs/neotree-configs')
+lua require('my-lua-configs/lualine-configs')
 
 lua require('my-lua-configs/vim-cmd-configs')
