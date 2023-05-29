@@ -59,5 +59,9 @@ require("neo-tree").setup({
             ["<"] = "prev_source",
             [">"] = "next_source",
           }
-        },
+    },
+    source_selector = {
+            winbar = true,
+            statusline = false
+    },
 })
