@@ -60,6 +60,8 @@ Plug 'wakatime/vim-wakatime'
 
 " autocomplete plugin
 Plug 'neovim/nvim-lspconfig'
+Plug 'onsails/lspkind-nvim'
+Plug 'glepnir/lspsaga.nvim'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
@@ -69,11 +71,7 @@ Plug 'hrsh7th/nvim-cmp'
 " nvim-cmp snippet: vsnip
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
-" nvim-cmp tabnine
-" Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
-" nvim-cmp lspkind
-Plug 'onsails/lspkind-nvim'
-" indent blankline
+" indent
 Plug 'lukas-reineke/indent-blankline.nvim'
 " lsp_signature
 Plug 'ray-x/lsp_signature.nvim'
@@ -122,6 +120,8 @@ Plug 'MunifTanjim/nui.nvim',
 
 Plug 'goolord/alpha-nvim'
 Plug 'folke/which-key.nvim'
+
+Plug 'shortcuts/no-neck-pain.nvim', { 'tag': '*' }
 
 " end of plugins settings
 call plug#end()

@@ -60,7 +60,6 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'F', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
 
   require "lsp_signature".on_attach()
-
   if client.name ~= 'efm' then
       client.server_capabilities.documentFormattingProvider= false
       client.server_capabilities.documentRangeFormattingProvide = false
@@ -172,3 +171,5 @@ nvim_lsp['tailwindcss'].setup {
     capabilities = capabilities,
     on_attach = on_attach,
 }
+
+require("lspsaga").setup({})
