@@ -172,4 +172,13 @@ nvim_lsp['tailwindcss'].setup {
     on_attach = on_attach,
 }
 
+nvim_lsp['clangd'].setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    cmd = {
+      "clangd",
+      "--offset-encoding=utf-16",
+    },
+}
+
 require("lspsaga").setup({})
