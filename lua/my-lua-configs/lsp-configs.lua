@@ -84,6 +84,11 @@ nvim_lsp['gopls'].setup {
     on_attach = on_attach,
 }
 
+nvim_lsp['pyright'].setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+}
+
 -- js/ts/jsx/tsx
 nvim_lsp['tsserver'].setup {
     capabilities = capabilities,
