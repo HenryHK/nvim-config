@@ -10,13 +10,13 @@ This is a neovim configuration as a js/golang dev's daily driver.
 
 ## Usage
 
-1. Install latest neovim and [Vim-Plug](https://github.com/junegunn/vim-plug).
+1. Install the latest Neovim (0.9+) and make sure `git` is available.
 
-2. Clone this repo (actullay just keep `init.vim` and `lua/` if you don't want to switch back to `coc.nvim` at some time).
+2. Clone this repo into `~/.config/nvim`.
 
-3. open nvim, do `:PlugInstall`
+3. Open Neovim once; [lazy.nvim](https://github.com/folke/lazy.nvim) bootstraps itself. Run `:Lazy sync` to install/update plugins.
 
-4. You may need to do some extra things to get everything work: install lsp (`gopls`, `tsserver`, `efm-language-server`, `rust-analyzer` in this config), install `eslint_d`, install treesitter for specific language (pls refer to treesitter docs), install nerd fonts for proper icons, install ctags for tag support, install `bat` for nice fzf file preview.
+4. You may need extra tooling: LSP servers (`gopls`, `tsserver`, `efm-language-server`, `rust-analyzer`), `eslint_d`, Tree-sitter parsers, nerd fonts for icons, `ctags`, and `bat` for fzf previews.
 
 ## Plugin Management
 
@@ -26,13 +26,13 @@ This is a neovim configuration as a js/golang dev's daily driver.
 
 ### Plugin Manager
 
-Use [Vim-Plug](https://github.com/junegunn/vim-plug) as plugin manager. Install Vim-Plug first following instructions by the author of Vim-Plug.
+Plugins are managed with [lazy.nvim](https://github.com/folke/lazy.nvim) in `lua/plugins/init.lua`. Core options live in `lua/config/*` and everything else sits in `lua/my-lua-configs/`.
 
-Copy the config into your ~~`.vimrc` or~~`init.vim` (~~I didn't test this with Vim but most of the settings should be the same~~ sorry Vim, but lua is so nice). Save it and reopen a nvim instance (or :so %) to run `:PlugInstall` or `<leader>pi` to install all plugins.
+Common commands:
 
-To remove useless plugins, run `:PlugClean`.
-
-I was sold [packer](https://github.com/wbthomason/packer.nvim) by the community. I definitely will try it out later when I have some spare time.
+* `:Lazy sync` - install or update plugins
+* `:Lazy clean` - remove unused plugins
+* `:Lazy profile` - inspect startup cost
 
 ## Autocomplete
 
@@ -209,7 +209,7 @@ I'm using Copilot now.
 
 ### Lua V.S. Vimscript
 
-Lua is just faster. I'm still migrating my config. It now should have as many lua-based plugins possible. The next steps would be fully migrate `init.vim` to lua and move from `vim-plug` to `packer`.
+Lua is just faster. The config now runs fully from `init.lua` with lazy-loaded plugins managed by `lazy.nvim`.
 
 ## License
 MIT

@@ -1,5 +1,5 @@
 -- treesitter
-require'nvim-treesitter.configs'.setup {
+require'nvim-treesitter'.setup {
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
@@ -15,7 +15,7 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -- treesitter textobjects
-require'nvim-treesitter.configs'.setup {
+require'nvim-treesitter'.setup {
   textobjects = {
     select = {
       enable = true,
@@ -78,9 +78,6 @@ local treesitter_context = function(width)
     'interface',
   }
 
-  if vim.o.ft == "json" then
-    type_patterns = { "object", "pair" }
-  end
 
   local f = require("nvim-treesitter").statusline({
     indicator_size = width,

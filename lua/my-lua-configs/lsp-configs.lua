@@ -1,13 +1,9 @@
--- setup neodev before lspconfig
-require("neodev").setup({
-  -- add any options here, or leave empty to use the default settings
-})
+require("neodev").setup({})
 
--- nvim lsp config
-local nvim_lsp = require('lspconfig')
+local format_group = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
+capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.preselectSupport = true
 capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
@@ -17,101 +13,100 @@ capabilities.textDocument.completion.completionItem.commitCharactersSupport = tr
 capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
 capabilities.textDocument.completion.completionItem.resolveSupport = {
   properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
+    "documentation",
+    "detail",
+    "additionalTextEdits",
   },
 }
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
 }
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
-
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', 'F', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
-
-  require "lsp_signature".on_attach()
-  if client.name ~= 'efm' then
-      client.server_capabilities.documentFormattingProvider= false
-      client.server_capabilities.documentRangeFormattingProvide = false
+local function on_attach(client, bufnr)
+  local function bufmap(mode, lhs, rhs, desc)
+    vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true, noremap = true, desc = desc })
   end
 
-  vim.cmd("command! LspFormatting lua vim.lsp.buf.format()")
-  if client.name == 'efm' then
-      vim.api.nvim_exec([[
-       augroup LspAutocommands
-           autocmd! * <buffer>
-           autocmd BufWritePre <buffer> LspFormatting
-       augroup END
-       ]], true)
+  vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+  bufmap("n", "gD", vim.lsp.buf.declaration, "LSP declaration")
+  bufmap("n", "gd", 'Telescope lsp_definitions', "LSP definition")
+  bufmap("n", "gr", vim.lsp.buf.references, "LSP references")
+  bufmap("n", "gi", vim.lsp.buf.implementation, "LSP implementation")
+  bufmap("n", "K", vim.lsp.buf.hover, "Hover docs")
+  bufmap("n", "<C-k>", vim.lsp.buf.signature_help, "Signature help")
+  bufmap("n", "<space>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder")
+  bufmap("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder")
+  bufmap("n", "<space>wl", function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, "List workspace folders")
+  bufmap("n", "<space>D", vim.lsp.buf.type_definition, "Type definition")
+  bufmap("n", "<space>rn", vim.lsp.buf.rename, "Rename symbol")
+  bufmap("n", "<space>ca", vim.lsp.buf.code_action, "Code action")
+  bufmap("n", "<space>e", vim.diagnostic.open_float, "Line diagnostics")
+  bufmap("n", "<space>q", vim.diagnostic.setloclist, "Diagnostics to loclist")
+  bufmap("n", "[d", vim.diagnostic.goto_prev, "Prev diagnostic")
+  bufmap("n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
+  bufmap("n", "F", function()
+    vim.lsp.buf.format({ async = true })
+  end, "Format buffer")
+
+  require("lsp_signature").on_attach({}, bufnr)
+
+  if client.name ~= "efm" then
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+  else
+    vim.api.nvim_clear_autocmds({ group = format_group, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = format_group,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({ bufnr = bufnr })
+      end,
+    })
   end
 end
 
-
--- Enable some language servers with the additional completion capabilities offered by nvim-cmp
--- golang
-nvim_lsp['gopls'].setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
+local servers = {
+  "gopls",
+  "pyright",
+  "terraformls",
+  "tailwindcss",
 }
 
-nvim_lsp['pyright'].setup {
+local function enable(server, opts)
+  return vim.lsp.enable(server, vim.tbl_deep_extend("force", {
     capabilities = capabilities,
     on_attach = on_attach,
-}
+  }, opts or {}))
+end
 
--- js/ts/jsx/tsx
-nvim_lsp['tsserver'].setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-    handlers = {
-        ['textDocument/publishDiagnostics'] = function(...) end --disable tsserver diagnostics as we use efm now
-    },
-}
+for _, server in ipairs(servers) do
+  enable(server)
+end
 
--- config efm
+enable("ts_ls", {
+  handlers = {
+    ["textDocument/publishDiagnostics"] = function() end,
+  },
+})
+
 local eslint = {
-  lintCommand = './node_modules/.bin/eslint -f visualstudio --stdin --stdin-filename ${INPUT}',
+  lintCommand = "./node_modules/.bin/eslint -f visualstudio --stdin --stdin-filename ${INPUT}",
   lintIgnoreExitCode = true,
   lintStdin = true,
   lintFormats = {
     "%f(%l,%c): %tarning %m",
-    "%f(%l,%c): %rror %m"
+    "%f(%l,%c): %rror %m",
   },
-  formatCommand = './node_modules/.bin/eslint --fix-to-stdout --stdin --stdin-filename=${INPUT}',
+  formatCommand = "./node_modules/.bin/eslint --fix-to-stdout --stdin --stdin-filename=${INPUT}",
   formatStdin = true,
 }
 
-local prettier = {formatCommand = './node_modules/.bin/prettier --stdin-filepath ${INPUT}', formatStdin = true}
+local prettier = { formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}", formatStdin = true }
 
 local efm_languages = {
   yaml = { prettier },
@@ -119,71 +114,65 @@ local efm_languages = {
   markdown = { prettier },
   javascript = { eslint, prettier },
   javascriptreact = { eslint, prettier },
+  ["javascript.jsx"] = { eslint, prettier },
   typescript = { eslint, prettier },
-  typescriptreact = { eslint , prettier},
+  typescriptreact = { eslint, prettier },
+  ["typescript.tsx"] = { eslint, prettier },
   css = { prettier },
   scss = { prettier },
   sass = { prettier },
   less = { prettier },
-  html = { prettier }
+  html = { prettier },
 }
 
-nvim_lsp['efm'].setup {
-    settings = {
-        rootMarkers = {'.git/', 'package.json', '.zshrc'},
-        languages = efm_languages,
-    },
-    init_options = {documentFormatting = true},
-    capabilities = capabilities,
-    on_attach = on_attach,
-    filetypes = {
-        'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx', 'json', 'html'
-    },
-}
-
--- setting up lua
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, 'lua/?.lua')
-table.insert(runtime_path, 'lua/?/init.lua')
--- config lua for neovim
-nvim_lsp['lua_ls'].setup({
-    settings = {
-        Lua = {
-            runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = 'LuaJIT',
-                -- Setup your lua path
-                path = runtime_path,
-            },
-            diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = { 'vim' },
-            },
-            workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file('', true),
-                checkThirdParty = false,
-            },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {
-                enable = false,
-            },
-        },
-    },
+vim.lsp.efm.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    rootMarkers = { ".git/", "package.json", ".zshrc" },
+    languages = efm_languages,
+  },
+  init_options = { documentFormatting = true },
+  filetypes = {
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx",
+    "json",
+    "html",
+  },
 })
 
-nvim_lsp['tailwindcss'].setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-}
+local runtime_path = vim.split(package.path, ";")
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
 
-nvim_lsp['clangd'].setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-    cmd = {
-      "clangd",
-      "--offset-encoding=utf-16",
+enable("lua_ls", {
+  settings = {
+    Lua = {
+      runtime = {
+        version = "LuaJIT",
+        path = runtime_path,
+      },
+      diagnostics = {
+        globals = { "vim" },
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false,
+      },
+      telemetry = {
+        enable = false,
+      },
     },
-}
+  },
+})
 
-require("lspsaga").setup({})
+enable("clangd", {
+  cmd = {
+    "clangd",
+    "--offset-encoding=utf-16",
+  },
+})
