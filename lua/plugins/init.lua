@@ -61,7 +61,7 @@ return {
   },
 
   -- Git
-  { "tpope/vim-fugitive", cmd = { "G", "Git", "Gdiffsplit", "Gvdiffsplit", "GBrowse", "Gblame" } },
+  { "tpope/vim-fugitive", cmd = { "G", "Git", "Gdiffsplit", "Gvdiffsplit", "GBrowse", "Gblame", "Gread" } },
   { "tpope/vim-rhubarb", event = "VeryLazy" },
   { "airblade/vim-gitgutter", event = { "BufReadPre", "BufNewFile" } },
   { "APZelos/blamer.nvim", event = "BufReadPost" },

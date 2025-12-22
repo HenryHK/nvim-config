@@ -125,7 +125,7 @@ local efm_languages = {
   html = { prettier },
 }
 
-vim.lsp.efm.setup({
+require('lspconfig').efm.setup({
   capabilities = capabilities,
   on_attach = on_attach,
   settings = {
