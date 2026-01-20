@@ -72,7 +72,7 @@ map("i", "gpr", function()
   require("goto-preview").goto_preview_references()
 end, { silent = true })
 
-map("i", "'\"", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+map("i", "'\"", 'copilot#Accept("\\<CR>")', { silent = true, expr = true })
 
 map("n", "zR", function()
   require("ufo").openAllFolds()

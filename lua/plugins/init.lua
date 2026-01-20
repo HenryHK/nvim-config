@@ -247,8 +247,8 @@ return {
   { "junegunn/fzf", build = "./install --bin", event = "VeryLazy" },
   { "junegunn/fzf.vim", event = "VeryLazy", dependencies = { "junegunn/fzf" } },
 
-  -- GitHub Copilot
-  { "github/copilot.vim", event = "InsertEnter" },
+  -- -- GitHub Copilot
+  -- { "github/copilot.vim", event = "InsertEnter" },
 
   -- Utils
   { "wakatime/vim-wakatime", event = "VeryLazy" },

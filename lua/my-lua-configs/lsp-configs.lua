@@ -32,7 +32,7 @@ local function on_attach(client, bufnr)
   vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
 
   bufmap("n", "gD", vim.lsp.buf.declaration, "LSP declaration")
-  bufmap("n", "gd", 'Telescope lsp_definitions', "LSP definition")
+  bufmap("n", "gd", "<cmd>Telescope lsp_definitions<cr>", "LSP definition")
   bufmap("n", "gr", vim.lsp.buf.references, "LSP references")
   bufmap("n", "gi", vim.lsp.buf.implementation, "LSP implementation")
   bufmap("n", "K", vim.lsp.buf.hover, "Hover docs")
